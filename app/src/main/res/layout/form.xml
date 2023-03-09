@@ -8,8 +8,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="214dp">
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                 android:layout_width="194dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="7dp"
-                android:text="TextView"
+                android:text="Default to Aus"
                 app:layout_constraintEnd_toEndOf="@+id/tvCountry"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
@@ -168,29 +168,31 @@
                 android:layout_marginTop="13dp"
                 android:text="Date (start and end)*"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLocation3" />
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDateStart"
-                android:layout_width="94dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="7dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/tvDateEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDateBoth" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvDateEnd"
-                android:layout_width="94dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="7dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/tvDateStart"
-                app:layout_constraintTop_toBottomOf="@+id/tvDateBoth" />
+                <TextView
+                    android:id="@+id/tvDateEnd"
+                    android:layout_width="94dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="7dp"
+                    android:text="put in 2nd pag"
+                    app:layout_constraintStart_toEndOf="@+id/tvDateStart"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDateStart"
+                    android:layout_width="94dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="7dp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvDateEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvStartTime"
@@ -231,7 +233,7 @@
                 android:layout_width="194dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="7dp"
-                android:text="TextView"
+                android:text="put in 2nd page"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvEndTime" />
 
@@ -241,7 +243,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="13dp"
-                android:text="Further Details"
+                android:text="Further Details (2nd page)"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -257,52 +259,65 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvFurtherDetails" />
 
-            <TextView
-                android:id="@+id/imgUpload"
-                android:layout_width="195dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="13dp"
-                android:text="Upload Image"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/tvFurtherDetails2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFurtherDetails2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/UploadIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="160dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgUpload"
-                app:layout_constraintStart_toStartOf="@+id/imgUpload"
-                app:layout_constraintTop_toTopOf="@+id/imgUpload"
-                app:srcCompat="@android:drawable/ic_menu_upload" />
+                <ImageView
+                    android:id="@+id/UploadIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="160dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgUpload"
+                    app:layout_constraintStart_toStartOf="@+id/imgUpload"
+                    app:layout_constraintTop_toTopOf="@+id/imgUpload"
+                    app:srcCompat="@android:drawable/ic_menu_upload" />
 
-            <Button
-                android:id="@+id/SaveBttn"
-                android:layout_width="403dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="34dp"
-                android:text="Save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/imgUpload"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Upload Image"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/nextBttn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="118dp"
-                android:layout_marginTop="806dp"
-                android:layout_marginEnd="20dp"
-                android:text="Next"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgUpload"
-                app:layout_constraintTop_toBottomOf="@+id/topborder" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/SaveBttn"
+                    android:layout_width="177dp"
+                    android:layout_height="47dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Save"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/nextBttn2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/nextBttn2"
+                    android:layout_width="177dp"
+                    android:layout_height="47dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/SaveBttn"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
