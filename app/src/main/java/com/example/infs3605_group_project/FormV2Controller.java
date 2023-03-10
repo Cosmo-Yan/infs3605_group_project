@@ -35,8 +35,8 @@ public class FormV2Controller extends AppCompatActivity {
                         // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
                         this));
 
-        /**This is the drop down for the different countries
-        Currently, we are unable to show all countries*/
+        //This is the drop down for the different countries
+        //NOTE: Currently, we are unable to show all countries. Currently stopped at India
         Spinner Countryspinner = (Spinner) findViewById(R.id.country_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         adapter = ArrayAdapter.createFromResource(this,
