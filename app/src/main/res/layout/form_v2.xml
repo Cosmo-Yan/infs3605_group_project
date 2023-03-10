@@ -104,14 +104,34 @@
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/uploadImage"
-                android:layout_width="221dp"
-                android:layout_height="63dp"
-                android:ems="10"
-                android:hint="Upload image "
-                android:inputType="textPersonName"
-                android:textSize="14sp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/uploadImage"
+                    android:layout_width="125dp"
+                    android:layout_height="52dp"
+                    android:ems="10"
+                    android:hint="Upload image "
+                    android:inputType="none"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/uploadIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/uploadIcon"
+                    android:layout_width="254dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/uploadImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/uploadImage"
+                    app:layout_constraintTop_toTopOf="@+id/uploadImage"
+                    app:srcCompat="@android:drawable/ic_menu_upload" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
