@@ -3,9 +3,12 @@ package com.example.infs3605_group_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.Locale;
@@ -58,6 +61,42 @@ public class FormV2Controller extends AppCompatActivity {
         //---------------------------------------------------------------------------------//
 
 
+
+        EditText myEditText = findViewById(R.id.orgName);
+
+        myEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Define the regular expression for the specific format
+                String regex = "^[z]\\d{7}$";
+
+                /* String regex key:
+                    ^: The start of the string
+                    [A-Za-z]: One uppercase or lowercase letter
+                    \\d{7}: Seven digits (numbers)
+                    $: The end of the string
+                */
+
+                // Check if the input matches the regular expression
+                if (!s.toString().matches(regex)) {
+                    // If the input does not match the regular expression, show an error message
+                    myEditText.setError("Invalid input format. Please enter one letter followed by 7 numbers (e.g., z123456).");
+                } else {
+                    // If the input matches the regular expression, clear the error message
+                    myEditText.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
+            }
+        });
 
     }
 }
