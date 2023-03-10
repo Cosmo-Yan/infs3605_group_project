@@ -55,7 +55,7 @@
                 android:textSize="14sp" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/events_spinner"
                 android:layout_width="255dp"
                 android:layout_height="63dp"
                 android:contentDescription="Choose the event to record*"
@@ -70,13 +70,20 @@
                 android:inputType="textPersonName"
                 android:textSize="14sp" />
 
+            <Spinner
+                android:id="@+id/country_spinner"
+                android:layout_width="256dp"
+                android:layout_height="59dp"
+                android:contentDescription="Choose a country that fits the event*"
+                android:hint="Choose a country*" />
+
             <EditText
                 android:id="@+id/location"
                 android:layout_width="379dp"
                 android:layout_height="64dp"
                 android:ems="10"
                 android:hint="Location*"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine|textPersonName"
                 android:textSize="14sp" />
 
             <EditText
