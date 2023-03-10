@@ -54,19 +54,12 @@
                 android:inputType="textPersonName"
                 android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/eventType"
-                android:layout_width="255dp"
-                android:layout_height="62dp"
-                android:ems="10"
-                android:hint="Event type (dropdown)*"
-                android:inputType="textPersonName"
-                android:textSize="14sp" />
-
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_width="255dp"
+                android:layout_height="63dp"
+                android:contentDescription="Choose the event to record*"
+                android:hint="Pick an event*" />
 
             <EditText
                 android:id="@+id/country"
