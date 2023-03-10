@@ -2,11 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--This code defines a rectangle shape with a transparent fill color and a border with
-     a width of 4dp and a color defined by the border_color resource.-->
+     a width of 4dp and a color defined by the border_color resource.
 
     <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
         <solid android:color="@android:color/transparent" />
         <stroke android:width="4dp" android:color="@color/black" />
     </shape>
+
+    -->
 
 </selector>
