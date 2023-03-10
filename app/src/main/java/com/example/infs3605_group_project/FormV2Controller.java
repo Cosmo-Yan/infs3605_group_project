@@ -22,6 +22,9 @@ public class FormV2Controller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
 
+        //---------------------------------------------------------------------------------//
+        /* The code below is for the drop downs for Event type and Country */
+
         //This is the drop down for the events type/activity type
         Spinner spinner = (Spinner) findViewById(R.id.events_spinner);
         // Creates an ArrayAdapter using the string array and a default spinner layout
@@ -59,8 +62,7 @@ public class FormV2Controller extends AppCompatActivity {
                         this));
 
         //---------------------------------------------------------------------------------//
-
-
+        /* This section below is the validation code for the 'Name of Organiser' edit view */
 
         EditText myEditText = findViewById(R.id.orgName);
 
