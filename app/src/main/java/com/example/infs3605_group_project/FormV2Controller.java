@@ -3,6 +3,7 @@ package com.example.infs3605_group_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -53,5 +54,10 @@ public class FormV2Controller extends AppCompatActivity {
                         R.layout.contact_spinner_row_nothing_selected2,
                         // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
                         this));
+
+        //---------------------------------------------------------------------------------//
+
+
+
     }
 }

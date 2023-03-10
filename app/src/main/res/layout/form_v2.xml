@@ -102,7 +102,8 @@
                 android:ems="10"
                 android:hint="Enter any further details"
                 android:inputType="textMultiLine"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLength="500"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
