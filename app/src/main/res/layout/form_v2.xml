@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/screenName3"
+                android:layout_width="194dp"
+                android:layout_height="29dp"
+                android:text="Record Details"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/reqField3"
+                android:layout_width="194dp"
+                android:layout_height="29dp"
+                android:text="* Indicates a required field"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/eventName"
+                android:layout_width="255dp"
+                android:layout_height="74dp"
+                android:ems="10"
+                android:hint="Enter name of event name*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/orgName"
+                android:layout_width="255dp"
+                android:layout_height="65dp"
+                android:ems="10"
+                android:hint="Enter name of organiser*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/eventType"
+                android:layout_width="255dp"
+                android:layout_height="62dp"
+                android:ems="10"
+                android:hint="Event type (dropdown)*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/country"
+                android:layout_width="255dp"
+                android:layout_height="64dp"
+                android:ems="10"
+                android:hint="Country*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="379dp"
+                android:layout_height="64dp"
+                android:ems="10"
+                android:hint="Location*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/startDate"
+                android:layout_width="254dp"
+                android:layout_height="61dp"
+                android:ems="10"
+                android:hint="Enter start date*"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/furtherDetails"
+                android:layout_width="255dp"
+                android:layout_height="171dp"
+                android:ems="10"
+                android:hint="Enter any further details"
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/uploadImage"
+                android:layout_width="221dp"
+                android:layout_height="63dp"
+                android:ems="10"
+                android:hint="Upload image "
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
