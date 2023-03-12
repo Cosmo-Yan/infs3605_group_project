@@ -14,19 +14,17 @@
         android:theme="@style/Theme.INFS3605_group_project"
         tools:targetApi="31">
         <activity
-
             android:name=".LoginPage"
-/>
-        <activity
-            android:name=".FormV2Controller"
-            />
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".FormV2Controller">
+    </activity>
     </application>
 
 </manifest>
