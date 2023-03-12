@@ -10,7 +10,7 @@ import androidx.room.TypeConverters;
 
 import java.util.Date;
 
-/* This class represents a table in the database and defines its schema.
+/* The entity class represents a table in the database and defines its schema.
    It is annotated with @Entity and contains a primary key and one or more columns
 */
     @Entity
@@ -24,7 +24,7 @@ import java.util.Date;
         private String country;
         private String location;
 
-        @ColumnInfo(name = "eventStartDate")
+        @ColumnInfo(name = "eventStartDate") //So the database knows how to store the date type
         private Date eventStartDate;
         private String furtherDetails; //Can be null
         private byte[] image;   // Byte array to store image data
