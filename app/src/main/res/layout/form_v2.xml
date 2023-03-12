@@ -61,15 +61,6 @@
                 android:contentDescription="Choose the event to record*"
                 android:hint="Pick an event*" />
 
-            <EditText
-                android:id="@+id/country"
-                android:layout_width="255dp"
-                android:layout_height="64dp"
-                android:ems="10"
-                android:hint="Country*"
-                android:inputType="textPersonName"
-                android:textSize="14sp" />
-
             <Spinner
                 android:id="@+id/country_spinner"
                 android:layout_width="256dp"
