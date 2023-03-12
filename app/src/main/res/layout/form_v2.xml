@@ -37,21 +37,20 @@
 
             <EditText
                 android:id="@+id/eventName"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="255dp"
-                android:layout_height="74dp"
                 android:ems="10"
                 android:hint="Enter name of event name*"
                 android:inputType="textPersonName"
                 android:padding="8dp"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/orgName"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="255dp"
-                android:layout_height="65dp"
                 android:ems="10"
                 android:hint="Enter name of organiser*"
                 android:inputType="textPersonName"
@@ -59,25 +58,25 @@
 
             <Spinner
                 android:id="@+id/events_spinner"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="255dp"
-                android:layout_height="63dp"
                 android:contentDescription="Choose the event to record*"
                 android:hint="Pick an event*" />
 
             <Spinner
                 android:id="@+id/country_spinner"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="256dp"
-                android:layout_height="59dp"
                 android:contentDescription="Choose a country that fits the event*"
                 android:hint="Choose a country*" />
 
             <EditText
                 android:id="@+id/location"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="379dp"
-                android:layout_height="64dp"
                 android:ems="10"
                 android:hint="Location*"
                 android:inputType="textMultiLine|textPersonName"
@@ -85,9 +84,9 @@
 
             <EditText
                 android:id="@+id/startDate"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="254dp"
-                android:layout_height="61dp"
                 android:ems="10"
                 android:hint="Enter start date*"
                 android:inputType="textPersonName"
@@ -95,14 +94,14 @@
 
             <EditText
                 android:id="@+id/furtherDetails"
+                android:layout_width="320dp"
+                android:layout_height="150dp"
                 android:background="@drawable/edit_text_border"
-                android:layout_width="255dp"
-                android:layout_height="171dp"
                 android:ems="10"
                 android:hint="Enter any further details"
                 android:inputType="textMultiLine"
-                android:textSize="14sp"
-                android:maxLength="500"/>
+                android:maxLength="500"
+                android:textSize="14sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -110,9 +109,9 @@
 
                 <EditText
                     android:id="@+id/uploadImage"
-                    android:background="@drawable/edit_text_border"
                     android:layout_width="125dp"
-                    android:layout_height="52dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:hint="Upload image "
                     android:inputType="none"
@@ -120,7 +119,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/uploadIcon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <ImageView
                     android:id="@+id/uploadIcon"
