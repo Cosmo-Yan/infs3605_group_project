@@ -43,7 +43,8 @@
                 android:hint="Enter name of event name*"
                 android:inputType="textPersonName"
                 android:padding="8dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                />
 
             <EditText
                 android:id="@+id/orgName"
