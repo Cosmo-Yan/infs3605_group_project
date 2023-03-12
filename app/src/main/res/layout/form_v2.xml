@@ -19,91 +19,134 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/screenName3"
-                android:layout_width="194dp"
-                android:layout_height="29dp"
-                android:text="Record Details"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/reqField3"
-                android:layout_width="194dp"
-                android:layout_height="29dp"
-                android:text="* Indicates a required field"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/eventName"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter name of event name*"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reqField3" />
 
-            <EditText
-                android:id="@+id/eventName"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter name of event name*"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/orgName"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter name of organiser*"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
-            <EditText
-                android:id="@+id/orgName"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter name of organiser*"
-                android:inputType="textPersonName"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/reqField3"
+                    android:layout_width="194dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="2dp"
+                    android:text="* Indicates a required field"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/screenName3" />
 
-            <Spinner
-                android:id="@+id/events_spinner"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:contentDescription="Choose the event to record*"
-                android:hint="Pick an event*" />
+                <Spinner
+                    android:id="@+id/country_spinner"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:contentDescription="Choose a country that fits the event*"
+                    android:hint="Choose a country*"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/events_spinner" />
 
-            <Spinner
-                android:id="@+id/country_spinner"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:contentDescription="Choose a country that fits the event*"
-                android:hint="Choose a country*" />
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter start date*"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/location" />
 
-            <EditText
-                android:id="@+id/location"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Location*"
-                android:inputType="textMultiLine|textPersonName"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/screenName3"
+                    android:layout_width="194dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Record Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/startDate"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter start date*"
-                android:inputType="textPersonName"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/furtherDetails"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter any further details"
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/startDate" />
 
-            <EditText
-                android:id="@+id/furtherDetails"
-                android:layout_width="320dp"
-                android:layout_height="150dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter any further details"
-                android:inputType="textMultiLine"
-                android:maxLength="500"
-                android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/location"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Location*"
+                    android:inputType="textMultiLine|textPersonName"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/country_spinner" />
+
+                <Spinner
+                    android:id="@+id/events_spinner"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:contentDescription="Choose the event to record*"
+                    android:hint="Pick an event*"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/orgName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -111,6 +154,8 @@
                     android:id="@+id/uploadImage"
                     android:layout_width="125dp"
                     android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:hint="Upload image "
@@ -120,18 +165,19 @@
                     app:layout_constraintEnd_toStartOf="@+id/uploadIcon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/uploadIcon"
-                    android:background="@drawable/image_upload_icon"
-                    android:layout_width="254dp"
+                    android:layout_width="220dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="2dp"
+                    android:background="@drawable/image_upload_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/uploadImage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/uploadImage"
                     app:layout_constraintTop_toTopOf="@+id/uploadImage"
+                    app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@android:drawable/ic_menu_upload" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
