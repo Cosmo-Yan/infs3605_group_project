@@ -1,3 +1,106 @@
 <resources>
     <string name="app_name">INFS3605_group_project</string>
+
+        <string-array name="events_array">
+            <item>Broadcast Media Appearance</item>
+            <item>Committee membership</item>
+            <item>Community Service</item>
+            <item>Conference reviewing / refereeing</item>
+            <item>Consulting / Advisory</item>
+            <item>Distinction</item>
+            <item>Event administration</item>
+            <item>Event participation</item>
+            <item>Expert witness</item>
+            <item>Fellowship</item>
+            <item>Grant application assessment</item>
+            <item>Institutional review</item>
+            <item>Journal reviewing / refereeing</item>
+            <item>Membership</item>
+            <item>Public presentation</item>
+            <item>Office held</item>
+            <item>Print media interview</item>
+            <item>Editorial Duty</item>
+
+        </string-array>
+
+        <string-array name="countries_array">
+            <item>Afghanistan</item>
+            <item>Albania</item>
+            <item>Algeria</item>
+            <item>Andorra</item>
+            <item>Angola</item>
+            <item>Antigua and Barbuda</item>
+            <item>Argentina</item>
+            <item>Armenia</item>
+            <item>Australia</item>
+            <item>Austria</item>
+            <item>Azerbaijan</item>
+            <item>Bahamas</item>
+            <item>Bahrain</item>
+            <item>Bangladesh</item>
+            <item>Barbados</item>
+            <item>Belarus</item>
+            <item>Belgium</item>
+            <item>Belize</item>
+            <item>Benin</item>
+            <item>Bhutan</item>
+            <item>Bolivia</item>
+            <item>Bosnia and Herzegovina</item>
+            <item>Botswana</item>
+            <item>Brazil</item>
+            <item>Brunei</item>
+            <item>Bulgaria</item>
+            <item>Burkina Faso</item>
+            <item>Burundi</item>
+            <item>Cabo Verde</item>
+            <item>Cambodia</item>
+            <item>Cameroon</item>
+            <item>Canada</item>
+            <item>Central African Republic</item>
+            <item>Chad</item>
+            <item>Chile</item>
+            <item>China</item>
+            <item>Colombia</item>
+            <item>Comoros</item>
+            <item>Congo, Democratic Republic of the</item>
+            <item>Congo, Republic of the</item>
+            <item>Costa Rica</item>
+            <item>Cote dIvoire</item>
+            <item>Croatia</item>
+            <item>Cuba</item>
+            <item>Cyprus</item>
+            <item>Czech Republic</item>
+            <item>Denmark</item>
+            <item>Djibouti</item>
+            <item>Dominica</item>
+            <item>Dominican Republic</item>
+            <item>Ecuador</item>
+            <item>Egypt</item>
+            <item>El Salvador</item>
+            <item>Equatorial Guinea</item>
+            <item>Eritrea</item>
+            <item>Estonia</item>
+            <item>Eswatini (formerly Swaziland)</item>
+            <item>Ethiopia</item>
+            <item>Fiji</item>
+            <item>Finland</item>
+            <item>France</item>
+            <item>Gabon</item>
+            <item>Gambia</item>
+            <item>Georgia</item>
+            <item>Germany</item>
+            <item>Ghana</item>
+            <item>Greece</item>
+            <item>Grenada</item>
+            <item>Guatemala</item>
+            <item>Guinea</item>
+            <item>Guinea-Bissau</item>
+            <item>Guyana</item>
+            <item>Haiti</item>
+            <item>Honduras</item>
+            <item>Hungary</item>
+            <item>Iceland</item>
+            <item>India</item>
+</string-array>
+
 </resources>
