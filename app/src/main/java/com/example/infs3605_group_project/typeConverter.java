@@ -10,7 +10,7 @@ import java.util.Date;
 public class typeConverter {
 
     /* This is a type converter class that tells the Room database how to convert the
-     "eventStartDate" type to a format that can be stored in the database.
+     Date type to a format that can be stored in the database.
      */
 
         @TypeConverter
