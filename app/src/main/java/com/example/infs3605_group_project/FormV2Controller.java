@@ -2,14 +2,18 @@ package com.example.infs3605_group_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Locale;
 import java.util.SortedSet;
@@ -22,8 +26,8 @@ public class FormV2Controller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
 
-        //---------------------------------------------------------------------------------//
-        /* The code below is for the drop downs for Event type and Country */
+
+        /* The code below is for the drop downs for Event type*/
 
         //This is the drop down for the events type/activity type
         Spinner spinner = (Spinner) findViewById(R.id.events_spinner);
@@ -42,15 +46,15 @@ public class FormV2Controller extends AppCompatActivity {
                         // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
                         this));
 
-        //This is the drop down for the different countries
+
+        /*This is the drop down for the different countries*/
+
         //NOTE: Currently, we are unable to show all countries. Currently stopped at India
         Spinner Countryspinner = (Spinner) findViewById(R.id.country_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         adapter = ArrayAdapter.createFromResource(this,
                 R.array.countries_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         Countryspinner.setAdapter(adapter);
         Countryspinner.setPrompt("Select country*");
 
@@ -61,7 +65,7 @@ public class FormV2Controller extends AppCompatActivity {
                         // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
                         this));
 
-        //---------------------------------------------------------------------------------//
+
         /* This section below is the validation code for the 'Name of Organiser' edit view */
 
         EditText myEditText = findViewById(R.id.orgName);
@@ -99,6 +103,18 @@ public class FormV2Controller extends AppCompatActivity {
                 // Do nothing
             }
         });
-
     }
+
+//    //WHY is this causing the app to keep crashing?
+//    @Override
+//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long id) {
+//        String choice = adapterView.getItemAtPosition(i).toString();
+//        Toast.makeText(getApplicationContext(), choice, Toast.LENGTH_LONG).show();
+//
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> adapterView ) {
+//
+//    }
 }

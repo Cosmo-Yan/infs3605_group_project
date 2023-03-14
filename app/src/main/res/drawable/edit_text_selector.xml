@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/white" android:state_focused="true" />
+    <item android:drawable="@android:color/transparent" />
+</selector>
+
+<!-- This drawable file is supposed to turn
+the edit text views' bg white when clicked
+however, maybe an on selected listener might be better-->

@@ -18,16 +18,6 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
     protected int nothingSelectedDropdownLayout;
     protected LayoutInflater layoutInflater;
 
-
-    /**
-     * Use this constructor to have NO 'Select One...' item, instead use
-     * the standard prompt or nothing at all.
-     *
-     * @param spinnerAdapter        wrapped Adapter.
-     * @param nothingSelectedLayout layout for nothing selected, perhaps
-     *                              you want text grayed out like a prompt...
-     * @param context
-     */
     public FormV2Adapter(
             SpinnerAdapter spinnerAdapter,
             int nothingSelectedLayout, Context context) {
@@ -35,19 +25,6 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
         this(spinnerAdapter, nothingSelectedLayout, -1, context);
     }
 
-    /**
-     * Use this constructor to Define your 'Select One...' layout as the first
-     * row in the returned choices.
-     * If you do this, you probably don't want a prompt on your spinner or it'll
-     * have two 'Select' rows.
-     *
-     * @param spinnerAdapter                wrapped Adapter. Should probably return false for isEnabled(0)
-     * @param nothingSelectedLayout         layout for nothing selected, perhaps you want
-     *                                      text grayed out like a prompt...
-     * @param nothingSelectedDropdownLayout layout for your 'Select an Item...' in
-     *                                      the dropdown.
-     * @param context
-     */
     public FormV2Adapter(SpinnerAdapter spinnerAdapter,
                          int nothingSelectedLayout, int nothingSelectedDropdownLayout, Context context) {
         this.adapter = spinnerAdapter;
@@ -88,13 +65,6 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
         return adapter.getDropDownView(position - EXTRA, null, parent);
     }
 
-    /**
-     * Override this to do something dynamic... For example, "Pick your favorite
-     * of these 37".
-     *
-     * @param parent
-     * @return
-     */
     protected View getNothingSelectedDropdownView(ViewGroup parent) {
         return layoutInflater.inflate(nothingSelectedDropdownLayout, parent, false);
     }
@@ -155,6 +125,7 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
         return position != 0; // Don't allow the 'nothing selected'
         // item to be picked.
     }
+
 }
 
 
