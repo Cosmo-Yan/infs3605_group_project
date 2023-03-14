@@ -48,6 +48,7 @@
                     android:ems="10"
                     android:hint="Enter name of organiser*"
                     android:inputType="textPersonName"
+                    android:padding="8dp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventName" />
@@ -75,6 +76,8 @@
                     android:background="@drawable/edit_text_border"
                     android:contentDescription="Choose a country that fits the event*"
                     android:hint="Choose a country*"
+                    android:gravity="center"
+                    android:padding="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/events_spinner" />
 
@@ -88,6 +91,7 @@
                     android:ems="10"
                     android:hint="Enter start date*"
                     android:inputType="textPersonName"
+                    android:padding="8dp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/location" />
@@ -117,6 +121,7 @@
                     android:hint="Enter any further details"
                     android:inputType="textMultiLine"
                     android:maxLength="500"
+                    android:padding="8dp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/startDate" />
@@ -131,6 +136,8 @@
                     android:ems="10"
                     android:hint="Location*"
                     android:inputType="textMultiLine|textPersonName"
+                    android:textAlignment="textStart"
+                    android:padding="8dp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/country_spinner" />
@@ -143,7 +150,9 @@
                     android:layout_marginTop="16dp"
                     android:background="@drawable/edit_text_border"
                     android:contentDescription="Choose the event to record*"
+                    android:gravity="center_horizontal|center_vertical"
                     android:hint="Pick an event*"
+                    android:padding="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/orgName" />
 

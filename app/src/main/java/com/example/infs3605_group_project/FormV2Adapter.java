@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 
@@ -16,6 +17,7 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
     protected int nothingSelectedLayout;
     protected int nothingSelectedDropdownLayout;
     protected LayoutInflater layoutInflater;
+
 
     /**
      * Use this constructor to have NO 'Select One...' item, instead use
