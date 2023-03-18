@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 
@@ -44,13 +45,6 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
         return adapter.getView(position - EXTRA, null, parent);
     }
 
-    /**
-     * View to show in Spinner with Nothing Selected
-     * Override this to do something dynamic... e.g. "37 Options Found"
-     *
-     * @param parent
-     * @return
-     */
     protected View getNothingSelectedView(ViewGroup parent) {
         return layoutInflater.inflate(nothingSelectedLayout, parent, false);
     }
@@ -122,10 +116,8 @@ public class FormV2Adapter implements SpinnerAdapter, ListAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return position != 0; // Don't allow the 'nothing selected'
-        // item to be picked.
+        return position != 0;
     }
-
 }
 
 

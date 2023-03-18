@@ -30,6 +30,7 @@ import java.util.Date;
         private byte[] image;   // Byte array to store image data
 
     //Constructors, Getters and setters
+
     public int getId() {
         return id;
     }

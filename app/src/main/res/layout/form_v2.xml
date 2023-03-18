@@ -25,8 +25,8 @@
 
                 <EditText
                     android:id="@+id/eventName"
-                    android:layout_width="320dp"
-                    android:layout_height="50dp"
+                    android:layout_width="317dp"
+                    android:layout_height="51dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/edit_text_border"
@@ -67,19 +67,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/screenName3" />
 
-                <Spinner
-                    android:id="@+id/country_spinner"
+                <AutoCompleteTextView
+                    android:id="@+id/countryAC"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/edit_text_border"
-                    android:contentDescription="Choose a country that fits the event*"
-                    android:hint="Choose a country*"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/events_spinner" />
+                    android:completionHint="Select a country"
+                    android:completionThreshold="1"
+                    android:hint="Select a country"
+                    app:layout_constraintBottom_toTopOf="@+id/location"
+                    app:layout_constraintTop_toBottomOf="@+id/events_spinner"
+                    tools:layout_editor_absoluteX="24dp" />
+
 
                 <EditText
                     android:id="@+id/startDate"
@@ -136,25 +135,34 @@
                     android:ems="10"
                     android:hint="Location*"
                     android:inputType="textMultiLine|textPersonName"
-                    android:textAlignment="textStart"
                     android:padding="8dp"
+                    android:textAlignment="textStart"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/country_spinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/countryAC" />
 
                 <Spinner
                     android:id="@+id/events_spinner"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
                     android:background="@drawable/edit_text_border"
                     android:contentDescription="Choose the event to record*"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="Pick an event*"
                     android:padding="8dp"
+                    tools:layout_editor_absoluteX="24dp"
+                    tools:layout_editor_absoluteY="217dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/select"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/orgName" />
+                    tools:layout_editor_absoluteY="150dp">
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -164,16 +172,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/events_spinner"
                     app:layout_constraintEnd_toEndOf="@+id/events_spinner"
                     app:layout_constraintTop_toTopOf="@+id/events_spinner"
-                    app:srcCompat="@android:drawable/arrow_down_float" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="30dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/country_spinner"
-                    app:layout_constraintEnd_toEndOf="@+id/country_spinner"
-                    app:layout_constraintTop_toTopOf="@+id/country_spinner"
                     app:srcCompat="@android:drawable/arrow_down_float" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
