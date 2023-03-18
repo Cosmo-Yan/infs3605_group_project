@@ -33,7 +33,7 @@ public class FormV2Controller extends AppCompatActivity {
             "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica",
             "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti",
             "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
-            "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini (formerly Swaziland)", "Ethiopia",
+            "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
             "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece",
             "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras",
             "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
@@ -42,8 +42,8 @@ public class FormV2Controller extends AppCompatActivity {
             "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
             "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
             "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
-            "Myanmar (formerly Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
-            "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia (formerly Macedonia)",
+            "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
+            "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
             "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea",
             "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
             "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines",
@@ -57,8 +57,12 @@ public class FormV2Controller extends AppCompatActivity {
             "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"};
 
     private static final String[] events = new String[] {
-            "Belgium", "France", "Italy", "Germany", "Spain"
-    };
+            "Education Exchange", "Centre Opening (International)", "Centre Opening (Domestic)",
+            "Relations Event", "Guest Speaker (International)", "Guest Speaker (Domestic)"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> eventItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +75,25 @@ public class FormV2Controller extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, countries);
         countryAutoComplete.setAdapter(countryAdapter);
 
-        //For the event type auto complete textview
+        //For the event type dropdown menu
+        autoCompleteTextView = findViewById(R.id.eventAC);
+        eventItems = new ArrayAdapter<String>(this,R.layout.event_type_dropdown_menu, events);
+
+        autoCompleteTextView.setAdapter(eventItems);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(FormV2Controller.this, "Item " + item, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         ArrayAdapter<String> eventAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, events);
         AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.eventAdapter);
+                findViewById(R.id.eventAC);
         textView.setAdapter(eventAdapter);
 
 
