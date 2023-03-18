@@ -14,180 +14,169 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/screenName3"
-                android:layout_width="194dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:text="Record Details"
-                android:textColor="#000000"
-                android:textColorHint="#040303"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/reqField3"
-                android:layout_width="194dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="2dp"
-                android:text="* Indicates a required field"
-                android:textColor="#070707"
-                android:textColorHint="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/screenName3" />
+                <TextView
+                    android:id="@+id/screenName3"
+                    android:layout_width="194dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Record Details"
+                    android:textColor="#000000"
+                    android:textColorHint="#040303"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/eventName"
-                android:layout_width="317dp"
-                android:layout_height="51dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter name of event name*"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reqField3" />
+                <TextView
+                    android:id="@+id/reqField3"
+                    android:layout_width="194dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="2dp"
+                    android:text="* Indicates a required field"
+                    android:textColor="#070707"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/screenName3" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:hint="@string/select"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                app:layout_constraintTop_toBottomOf="@+id/eventName">
+                <EditText
+                    android:id="@+id/eventName"
+                    android:layout_width="317dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter name of event name*"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reqField3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/select"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/eventName">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/eventAC"
+                        android:layout_width="320dp"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <EditText
+                    android:id="@+id/orgName"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter name of organiser*"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/eventAC"
+                    android:id="@+id/countryAC"
                     android:layout_width="320dp"
-                    android:layout_height="match_parent" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:completionHint="Select a country"
+                    android:completionThreshold="1"
+                    android:hint="Select a country"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/orgName" />
 
 
-            <EditText
-                android:id="@+id/orgName"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter name of organiser*"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:textSize="14sp"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                <EditText
+                    android:id="@+id/location"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Location*"
+                    android:inputType="textMultiLine|textPersonName"
+                    android:padding="8dp"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/countryAC" />
 
-            <Spinner
-                android:id="@+id/events_spinner"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edit_text_border"
-                android:contentDescription="Choose the event to record*"
-                android:gravity="center_horizontal|center_vertical"
-                android:hint="Pick an event*"
-                android:padding="8dp"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                tools:layout_editor_absoluteY="217dp" />
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter start date*"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/location" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/events_spinner"
-                app:layout_constraintEnd_toEndOf="@+id/events_spinner"
-                app:layout_constraintTop_toTopOf="@+id/events_spinner"
-                app:srcCompat="@android:drawable/arrow_down_float" />
+                <EditText
+                    android:id="@+id/furtherDetails"
+                    android:layout_width="320dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Enter any further details"
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventName"
+                    app:layout_constraintTop_toBottomOf="@+id/startDate" />
 
-            <AutoCompleteTextView
-                android:id="@+id/countryAC"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:completionHint="Select a country"
-                android:completionThreshold="1"
-                android:hint="Select a country"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                app:layout_constraintTop_toBottomOf="@+id/events_spinner" />
+                <Button
+                    android:id="@+id/uploadImage"
+                    android:layout_width="354dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:hint="Upload image "
+                    android:inputType="none"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/furtherDetails" />
 
-
-            <EditText
-                android:id="@+id/location"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Location*"
-                android:inputType="textMultiLine|textPersonName"
-                android:padding="8dp"
-                android:textAlignment="textStart"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/countryAC" />
-
-            <EditText
-                android:id="@+id/startDate"
-                android:layout_width="320dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter start date*"
-                android:inputType="textPersonName"
-                android:padding="8dp"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                app:layout_constraintTop_toBottomOf="@+id/location" />
-
-            <EditText
-                android:id="@+id/furtherDetails"
-                android:layout_width="320dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Enter any further details"
-                android:inputType="textMultiLine"
-                android:maxLength="500"
-                android:padding="8dp"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/eventName"
-                app:layout_constraintTop_toBottomOf="@+id/startDate" />
-
-            <Button
-                android:id="@+id/uploadImage"
-                android:layout_width="354dp"
-                android:layout_height="58dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:hint="Upload image "
-                android:inputType="none"
-                android:textColorHint="#000000"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/furtherDetails" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout

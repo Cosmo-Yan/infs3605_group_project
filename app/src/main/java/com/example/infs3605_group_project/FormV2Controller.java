@@ -96,25 +96,6 @@ public class FormV2Controller extends AppCompatActivity {
                 findViewById(R.id.eventAC);
         textView.setAdapter(eventAdapter);
 
-
-        /* The code below is for the drop downs for Event type*/
-        //This is the drop down for the events type/activity type
-        Spinner spinner = (Spinner) findViewById(R.id.events_spinner);
-        // Creates an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.events_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setPrompt("Select an event*");
-
-        spinner.setAdapter(
-                new FormV2Adapter(
-                        adapter,
-                        R.layout.contact_spinner_row_nothing_selected,
-                        // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
-                        this));
-
         /* This section below is the validation code for the 'Name of Organiser' edit view */
 
         EditText myEditText = findViewById(R.id.orgName);
