@@ -14,6 +14,5 @@ import androidx.room.TypeConverters;
     @TypeConverters({typeConverter.class})
     public abstract class EventDB extends RoomDatabase {
         public abstract EventDAO eventDAO();
-
     }
 
