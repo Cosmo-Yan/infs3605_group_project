@@ -34,11 +34,11 @@ public class FormV2Controller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
 
-        Log.d("Database debug","Step 1 - Load Room");
-        mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").build();
+        Log.d("Database debug","Step 1 - Load Room into singleton (easier)");
+        Singleton.getInstance(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "activities").build());
         Log.d("Database debug","Step 2 Room loaded, Load Data");
-        getData();
-        Log.d("Database debug","Step 3");
+        Singleton.getInstance().resetData();
+        activityList = Singleton.getInstance().getData();
 
         /* The code below is for the drop downs for Event type*/
 
@@ -114,23 +114,6 @@ public class FormV2Controller extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 // Do nothing
-            }
-        });
-    }
-
-    private void getData() {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.activityDao().deleteAll();
-                for(int i = 0; i<10; i++){
-                    Activity activity = new Activity(i, "Event Named "+String.valueOf(i),"UNSW or someone","Relations Building","not AU","Australia or somewhere","01/01/2001","Yes, there's more","Image URL here");
-                    mDb.activityDao().insertActivity(activity);
-                }
-                activityList = mDb.activityDao().getActivities();
-                for(Activity temp: activityList){
-                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
-                }
             }
         });
     }

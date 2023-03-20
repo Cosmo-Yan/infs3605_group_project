@@ -46,7 +46,7 @@ public class Activity {
 
     @SerializedName("image")
     @Expose
-    private String image;   // String location for the image nullable with default val
+    private String image;   // String location for the image nullable with default value
 
     public Activity(@NonNull Integer id, String eventName, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
         this.id = id;
