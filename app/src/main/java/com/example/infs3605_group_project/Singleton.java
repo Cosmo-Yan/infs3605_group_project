@@ -51,6 +51,7 @@ public class Singleton {
                 }
                 Log.d("Database debug","Step R3 - added data to database");
                 getData(false);
+                viewData();
             }
         });
     }
@@ -59,23 +60,10 @@ public class Singleton {
         return activityList;
     }
 
-    private void viewData(boolean newThread) {
-        if (newThread){
-            Executors.newSingleThreadExecutor().execute(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("Database debug","Step G0 - Getting data from database - starting new thread");
-                    getData(false);
-                }
-            });
-            return;
-        }
-        Log.d("Database debug","Step G1 - Getting data from database");
-        activityList = database.activityDao().getActivities();
+    public void viewData() {
         for(Activity temp: activityList){
-            Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
+            Log.i("Activity_Log_event",String.valueOf(temp.getId())+" "+temp.getEventName());
         }
-        Log.d("Database debug","Step G2 - Getting data from database");
     }
 
     private void getData(boolean newThread) {

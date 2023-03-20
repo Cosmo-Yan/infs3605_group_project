@@ -21,6 +21,10 @@ public class Activity {
     @Expose
     private String eventName;
 
+    @SerializedName("eventName")
+    @Expose
+    private String zid;
+
     @SerializedName("nameOfOrganiser")
     @Expose
     private String nameOfOrganiser;
@@ -47,6 +51,20 @@ public class Activity {
     @SerializedName("image")
     @Expose
     private String image;   // String location for the image nullable with default value
+
+    public Activity(@NonNull Integer id, String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
+        this.id = id;
+        this.eventName = eventName;
+        this.zid = zid;
+        this.nameOfOrganiser = nameOfOrganiser;
+        this.eventType = eventType;
+        this.country = country;
+        this.location = location;
+        this.eventStartDate = eventStartDate;
+        this.furtherDetails = furtherDetails;
+        this.image = image;
+    }
+
 
     public Activity(@NonNull Integer id, String eventName, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
         this.id = id;
@@ -133,5 +151,13 @@ public class Activity {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getZid() {
+        return zid;
+    }
+
+    public void setZid(String zid) {
+        this.zid = zid;
     }
 }

@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,59 +27,89 @@ import java.util.TreeSet;
 import java.util.concurrent.Executors;
 
 public class FormV2Controller extends AppCompatActivity {
+    //The following section is to make the country auto complete text view work
     private ActivityDatabase mDb;
     private List<Activity> activityList = new ArrayList<>();
+    private static final String[] countries = new String[] {
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+            "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
+            "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+            "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso",
+            "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada",
+            "Central African Republic (CAR)", "Chad", "Chile", "China", "Colombia", "Comoros",
+            "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica",
+            "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti",
+            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+            "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+            "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece",
+            "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras",
+            "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
+            "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo",
+            "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya",
+            "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
+            "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
+            "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
+            "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
+            "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
+            "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea",
+            "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
+            "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines",
+            "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
+            "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands",
+            "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname",
+            "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania",
+            "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+            "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
+            "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
+            "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"};
+
+    private static final String[] events = new String[] {
+            "Education Exchange", "Centre Opening (International)", "Centre Opening (Domestic)",
+            "Relations Event", "Guest Speaker (International)", "Guest Speaker (Domestic)"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> eventItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Default code to initialise the scene, load the view/xml
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
-
-        Log.d("Database debug","Step 1 - Load Room into singleton (easier)");
-        Singleton.getInstance(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "activities").build());
+        Log.d("Database debug","Step 1 - Load Room");
+        mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").build();
         Log.d("Database debug","Step 2 Room loaded, Load Data");
-        Singleton.getInstance().resetData();
-        activityList = Singleton.getInstance().getData();
+        getData();
+        Log.d("Database debug","Step 3");
+//        Singleton.getInstance(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "activities").build());
+//        Singleton.getInstance().resetData();
+//        activityList = Singleton.getInstance().getData();
+//        Singleton.getInstance().viewData();
+        //For the country auto complete textview
+        AutoCompleteTextView countryAutoComplete = findViewById(R.id.countryAC);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, countries);
+        countryAutoComplete.setAdapter(countryAdapter);
 
-        /* The code below is for the drop downs for Event type*/
+        //For the event type dropdown menu
+        autoCompleteTextView = findViewById(R.id.eventAC);
+        eventItems = new ArrayAdapter<String>(this,R.layout.event_type_dropdown_menu, events);
 
-        //This is the drop down for the events type/activity type
-        Spinner spinner = (Spinner) findViewById(R.id.events_spinner);
-        // Creates an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.events_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setPrompt("Select an event*");
+        autoCompleteTextView.setAdapter(eventItems);
 
-        spinner.setAdapter(
-                new FormV2Adapter(
-                        adapter,
-                        R.layout.contact_spinner_row_nothing_selected,
-                        // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
-                        this));
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(FormV2Controller.this, "Item " + item, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        /*This is the drop down for the different countries*/
-
-        //NOTE: Currently, we are unable to show all countries. Currently stopped at India
-        Spinner Countryspinner = (Spinner) findViewById(R.id.country_spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        adapter = ArrayAdapter.createFromResource(this,
-                R.array.countries_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Countryspinner.setAdapter(adapter);
-        Countryspinner.setPrompt("Select country*");
-
-        Countryspinner.setAdapter(
-                new FormV2Adapter(
-                        adapter,
-                        R.layout.contact_spinner_row_nothing_selected2,
-                        // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
-                        this));
-
+        ArrayAdapter<String> eventAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, events);
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                findViewById(R.id.eventAC);
+        textView.setAdapter(eventAdapter);
 
         /* This section below is the validation code for the 'Name of Organiser' edit view */
 
@@ -89,17 +121,16 @@ public class FormV2Controller extends AppCompatActivity {
                 // Do nothing
             }
 
+            //   String regex key:
+            //       ^: The start of the string
+            //       [A-Za-z]: One uppercase or lowercase letter
+            //       \\d{7}: Seven digits (numbers)
+            //       $: The end of the string
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Define the regular expression for the specific format
                 String regex = "^[z]\\d{7}$";
-
-                /* String regex key:
-                    ^: The start of the string
-                    [A-Za-z]: One uppercase or lowercase letter
-                    \\d{7}: Seven digits (numbers)
-                    $: The end of the string
-                */
 
                 // Check if the input matches the regular expression
                 if (!s.toString().matches(regex)) {
@@ -117,17 +148,21 @@ public class FormV2Controller extends AppCompatActivity {
             }
         });
     }
+    private void getData() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.activityDao().deleteAll();
+                for(int i = 0; i<10; i++){
+                    Activity activity = new Activity(i, "Event Named "+String.valueOf(i),"z100000"+String.valueOf(i),"UNSW or someone","Relations Building","not AU","Australia or somewhere","01/01/2001","Yes, there's more","Image URL here");
+                    mDb.activityDao().insertActivity(activity);
+                }
+                activityList = mDb.activityDao().getActivities();
+                for(Activity temp: activityList){
+                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
+                }
+            }
+        });
+    }
 
-//    //WHY is this causing the app to keep crashing?
-//    @Override
-//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long id) {
-//        String choice = adapterView.getItemAtPosition(i).toString();
-//        Toast.makeText(getApplicationContext(), choice, Toast.LENGTH_LONG).show();
-//
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> adapterView ) {
-//
-//    }
 }
