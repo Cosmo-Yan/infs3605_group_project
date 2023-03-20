@@ -30,6 +30,21 @@ import java.util.Date;
         private byte[] image;   // Byte array to store image data
 
     //Constructors, Getters and setters
+    public Event() {}
+
+    public Event(int id, String eventName, String nameOfOrganiser, String eventType, String country, String location, Date eventStartDate, String furtherDetails, byte[] image) {
+        this.id = id;
+        this.eventName = eventName;
+        this.nameOfOrganiser = nameOfOrganiser;
+        this.eventType = eventType;
+        this.country = country;
+        this.location = location;
+        this.eventStartDate = eventStartDate;
+        this.furtherDetails = furtherDetails;
+        this.image = image;
+    }
+
+
     public int getId() {
         return id;
     }
