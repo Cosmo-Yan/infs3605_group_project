@@ -1,10 +1,13 @@
 package com.example.infs3605_group_project;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -14,7 +17,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +32,10 @@ import java.util.TreeSet;
 import java.util.concurrent.Executors;
 
 public class FormV2Controller extends AppCompatActivity {
+
+    private final int GALLERY_REQ_CODE = 1000; //For image upload feature
+    ImageView imgGallery;
+
     //The following section is to make the country auto complete text view work
     private ActivityDatabase mDb;
     private List<Activity> activityList = new ArrayList<>();
@@ -80,17 +89,33 @@ public class FormV2Controller extends AppCompatActivity {
         Log.d("Database debug","Step 2 Room loaded, Load Data");
         getData();
         Log.d("Database debug","Step 3");
+
 //        Singleton.getInstance(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "activities").build());
 //        Singleton.getInstance().resetData();
 //        activityList = Singleton.getInstance().getData();
 //        Singleton.getInstance().viewData();
+
         //For the country auto complete textview
         AutoCompleteTextView countryAutoComplete = findViewById(R.id.countryAC);
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, countries);
         countryAutoComplete.setAdapter(countryAdapter);
 
-        //For the event type dropdown menu
+        //For the upload image button
+        imgGallery = findViewById(R.id.imageView2);
+        Button btnGallery = findViewById(R.id.uploadImage);
+
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent iGallery = new Intent(Intent.ACTION_PICK);
+                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(iGallery, GALLERY_REQ_CODE);
+            }
+        });
+
+         //For the event type dropdown menu
         autoCompleteTextView = findViewById(R.id.eventAC);
         eventItems = new ArrayAdapter<String>(this,R.layout.event_type_dropdown_menu, events);
 
@@ -163,6 +188,20 @@ public class FormV2Controller extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //This method is for the upload image feature
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode==RESULT_OK){
+
+            if(requestCode==GALLERY_REQ_CODE){
+
+                imgGallery.setImageURI(data.getData());
+            }
+        }
     }
 
 }
