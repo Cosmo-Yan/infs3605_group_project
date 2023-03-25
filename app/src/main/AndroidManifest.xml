@@ -25,6 +25,13 @@
         <activity
             android:name=".FormV2Controller">
     </activity>
+        <activity
+            android:name=".Dashboard.DashboardActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

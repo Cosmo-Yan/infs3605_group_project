@@ -103,6 +103,8 @@ import java.util.Date;
     public void setImage(byte[] image) {
         this.image = image;
     }
+
+
 }
 
 

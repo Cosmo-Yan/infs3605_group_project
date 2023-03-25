@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,12 +12,12 @@ import com.example.infs3605_group_project.R;
 
 import java.util.List;
 
-public class DashboardViewAdapter extends BaseAdapter{
+public class DashboardViewAdapter extends ArrayAdapter<Graph> {
     private Context context;
     private List<Graph> graphs;
 
-    public DashboardViewAdapter(Context context, List<Graph> graphs) {
-        this.context = context;
+    public DashboardViewAdapter(Context context, int id, List<Graph> graphs) {
+        super(context, id, graphs);
         this.graphs = graphs;
     }
 
@@ -27,7 +27,7 @@ public class DashboardViewAdapter extends BaseAdapter{
     }
 
     @Override
-    public Object getItem(int position) {
+    public Graph getItem(int position) {
         return graphs.get(position);
     }
 
@@ -43,7 +43,8 @@ public class DashboardViewAdapter extends BaseAdapter{
         Graph graph = graphs.get(position);
         ImageView Graph = convertView.findViewById(R.id.dashboard_item_image);
         TextView GraphName = convertView.findViewById(R.id.dashboard_item_text);
-        Graph.setImageResource(graph.getImageResource());
+        //Graph.setImageResource(graph.getImageResource());
+        Graph.setImageBitmap(graph.getImageGraph());
         GraphName.setText(graph.getName());
         return convertView;
     }

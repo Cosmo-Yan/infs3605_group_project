@@ -1,19 +1,29 @@
 package com.example.infs3605_group_project.Dashboard;
 
+import android.graphics.Bitmap;
+
 public class Graph {
-    private int imageResource;
+    private Bitmap imageGraph;
     private String name;
 
-    public Graph(int imageResource, String name) {
-        this.imageResource = imageResource;
+    public Graph(Bitmap imageGraph, String name) {
+        this.imageGraph = imageGraph;
         this.name = name;
     }
 
-    public int getImageResource() {
-        return imageResource;
+    public Bitmap getImageGraph() {
+        return imageGraph;
+    }
+
+    public void setImageGraph(Bitmap imageGraph) {
+        this.imageGraph = imageGraph;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
