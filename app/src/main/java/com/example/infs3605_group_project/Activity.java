@@ -54,8 +54,8 @@ public class Activity {
 
     public Activity(@NonNull Integer id, String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
         this.id = id;
-        this.eventName = eventName;
         this.zid = zid;
+        this.eventName = eventName;
         this.nameOfOrganiser = nameOfOrganiser;
         this.eventType = eventType;
         this.country = country;
@@ -66,16 +66,16 @@ public class Activity {
     }
 
 
-    public Activity(@NonNull Integer id, String eventName, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
+    public Activity(@NonNull Integer id, String zid, String eventName, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails) {
         this.id = id;
         this.eventName = eventName;
+        this.zid = zid;
         this.nameOfOrganiser = nameOfOrganiser;
         this.eventType = eventType;
         this.country = country;
         this.location = location;
         this.eventStartDate = eventStartDate;
         this.furtherDetails = furtherDetails;
-        this.image = image;
     }
 
     public Activity(){} // Needed or database (room) won't work
