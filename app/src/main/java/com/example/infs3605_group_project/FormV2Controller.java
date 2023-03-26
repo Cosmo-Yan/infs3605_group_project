@@ -1,6 +1,7 @@
 package com.example.infs3605_group_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,12 +19,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.Executors;
 
 public class FormV2Controller extends AppCompatActivity {
     //The following section is to make the country auto complete text view work
+    private ActivityDatabase mDb;
+    private List<Activity> activityList = new ArrayList<>();
     private static final String[] countries = new String[] {
             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
             "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
@@ -68,7 +75,15 @@ public class FormV2Controller extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
-
+        Log.d("Database debug","Step 1 - Load Room");
+        mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").build();
+        Log.d("Database debug","Step 2 Room loaded, Load Data");
+        getData();
+        Log.d("Database debug","Step 3");
+//        Singleton.getInstance(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "activities").build());
+//        Singleton.getInstance().resetData();
+//        activityList = Singleton.getInstance().getData();
+//        Singleton.getInstance().viewData();
         //For the country auto complete textview
         AutoCompleteTextView countryAutoComplete = findViewById(R.id.countryAC);
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this,
@@ -133,4 +148,21 @@ public class FormV2Controller extends AppCompatActivity {
             }
         });
     }
+    private void getData() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.activityDao().deleteAll();
+                for(int i = 0; i<10; i++){
+                    Activity activity = new Activity(i, "Event Named "+String.valueOf(i),"z100000"+String.valueOf(i),"UNSW or someone","Relations Building","not AU","Australia or somewhere","01/01/2001","Yes, there's more","Image URL here");
+                    mDb.activityDao().insertActivity(activity);
+                }
+                activityList = mDb.activityDao().getActivities();
+                for(Activity temp: activityList){
+                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
+                }
+            }
+        });
+    }
+
 }
