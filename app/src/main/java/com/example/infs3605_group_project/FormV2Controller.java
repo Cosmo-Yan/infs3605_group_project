@@ -6,6 +6,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -194,12 +195,14 @@ public class FormV2Controller extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.i("imgTest", String.valueOf(data.getData()));
+        imgGallery.setImageURI(Uri.parse("https://images.unsplash.com/photo-1542370285-b8eb8317691c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"));
 
         if (resultCode==RESULT_OK){
 
             if(requestCode==GALLERY_REQ_CODE){
-
-                imgGallery.setImageURI(data.getData());
+            Log.i("imgTest2", "success");
+//                imgGallery.setImageURI(data.getData());
             }
         }
     }

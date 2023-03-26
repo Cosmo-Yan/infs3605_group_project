@@ -182,6 +182,7 @@
                     android:layout_marginTop="35dp"
                     app:layout_constraintStart_toStartOf="@+id/uploadImage"
                     app:layout_constraintTop_toBottomOf="@+id/uploadImage"
+                    app:srcCompat="@drawable/sydney"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
