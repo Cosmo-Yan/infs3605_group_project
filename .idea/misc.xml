@@ -4,8 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/drawable/custom_edittext.xml" value="0.2985" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.2985" />
         <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/drawable/round_corners.xml" value="0.2985" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/drawable/selector.xml" value="0.2985" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/activity_account.xml" value="0.3625" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/activity_dash_board.xml" value="0.3625" />
         <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/activity_new_event.xml" value="0.3625" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/contact_spinner_row_nothing_selected.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/contact_spinner_row_nothing_selected2.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/form.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/form_v2.xml" value="0.33" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/layout/login_page.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/cosmo/AndroidStudioProjects/INFS3605_group_project/app/src/main/res/menu/menu.xml" value="0.27109375" />
       </map>
     </option>
   </component>
