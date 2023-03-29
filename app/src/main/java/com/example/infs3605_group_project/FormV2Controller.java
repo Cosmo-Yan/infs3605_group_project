@@ -3,11 +3,8 @@ package com.example.infs3605_group_project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -15,15 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.example.infs3605_group_project.Activity.Activity;
+import com.example.infs3605_group_project.Activity.ActivityDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.concurrent.Executors;
 
 public class FormV2Controller extends AppCompatActivity {

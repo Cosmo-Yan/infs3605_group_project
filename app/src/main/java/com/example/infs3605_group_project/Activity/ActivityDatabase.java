@@ -1,4 +1,4 @@
-package com.example.infs3605_group_project;
+package com.example.infs3605_group_project.Activity;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
