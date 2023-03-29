@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/feed"
+        android:title="Feed"
+        android:icon = "@drawable/ic_baseline_feed_24"
+        />
+
+    <item
+        android:id="@+id/dashboard"
+        android:title="Dashboard"
+        android:icon = "@drawable/ic_baseline_dashboard_24"
+        />
+
+    <item
+        android:id="@+id/account"
+        android:title="Account"
+        android:icon = "@drawable/ic_baseline_account_box_24"
+        />
+
+    <item
+        android:id="@+id/newEvent"
+        android:title="New Event"
+        android:icon = "@drawable/ic_baseline_note_add_24"
+        />
+
+</menu>

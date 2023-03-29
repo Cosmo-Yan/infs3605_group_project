@@ -3,26 +3,35 @@
     <string name="app_name">INFS3605_group_project</string>
     <string name="select">Select Item</string>
 
-        <string-array name="events_array">
-            <item>Broadcast Media Appearance</item>
-            <item>Committee membership</item>
-            <item>Community Service</item>
-            <item>Conference reviewing / refereeing</item>
-            <item>Consulting / Advisory</item>
-            <item>Distinction</item>
-            <item>Event administration</item>
-            <item>Event participation</item>
-            <item>Expert witness</item>
-            <item>Fellowship</item>
-            <item>Grant application assessment</item>
-            <item>Institutional review</item>
-            <item>Journal reviewing / refereeing</item>
-            <item>Membership</item>
-            <item>Public presentation</item>
-            <item>Office held</item>
-            <item>Print media interview</item>
-            <item>Editorial Duty</item>
+    <string-array name="events_array">
+        <item>Broadcast Media Appearance</item>
+        <item>Committee membership</item>
+        <item>Community Service</item>
+        <item>Conference reviewing / refereeing</item>
+        <item>Consulting / Advisory</item>
+        <item>Distinction</item>
+        <item>Event administration</item>
+        <item>Event participation</item>
+        <item>Expert witness</item>
+        <item>Fellowship</item>
+        <item>Grant application assessment</item>
+        <item>Institutional review</item>
+        <item>Journal reviewing / refereeing</item>
+        <item>Membership</item>
+        <item>Public presentation</item>
+        <item>Office held</item>
+        <item>Print media interview</item>
+        <item>Editorial Duty</item>
 
-        </string-array>
+    </string-array>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>
