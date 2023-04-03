@@ -1,6 +1,7 @@
 package com.example.infs3605_group_project.Dashboard;
 
 
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.example.infs3605_group_project.Event;
-import com.example.infs3605_group_project.EventDB;
+
+import com.example.infs3605_group_project.Activity.Activity;
+import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.R;
 
 import java.util.ArrayList;
@@ -40,8 +42,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private GraphAdapter GridDashAdapter;
 
-    private List<Event> Dataset;
-    private EventDB eDb;
+    private List<Activity> Dataset;
+    private ActivityDatabase eDb;
     private List<Graph> Graphs;
     private List<Stat> Stats;
 
@@ -61,19 +63,24 @@ public class DashboardActivity extends AppCompatActivity {
 
         //Instantiate Database Object & Retrieve Event List
         eDb = Room.databaseBuilder(getApplicationContext()
-                , EventDB.class, "Event-Database").build();
+                , ActivityDatabase.class, "Event-Database").build();
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Dataset.addAll(eDb.eventDAO().getAll());
+                    Dataset.addAll((ArrayList) eDb.activityDao().getActivities());
                 }
                 catch (NullPointerException npe){
                     System.out.println("Database Empty");
                 }
             }
         });
+
+        //Create Stats
+        //Number of Events
+        System.out.println(""+ String.valueOf(Dataset.size()) + "");
+        Stats.add(new Stat(Dataset.size(), "Number of Events Overall"));
 
 
 
@@ -82,9 +89,9 @@ public class DashboardActivity extends AppCompatActivity {
         PieChart typePieChart = new PieChart(getApplicationContext());
 
         List<PieEntry> entries = new ArrayList<>();
-        for (Event events : Dataset){
+        for (Activity activity : Dataset){
             float value = 1;
-            String label = events.getEventType();
+            String label = activity.getEventType();
             entries.add(new PieEntry(value, label));
         }
 
@@ -143,5 +150,6 @@ public class DashboardActivity extends AppCompatActivity {
         GraphAdapter gAdapter = new GraphAdapter( Graphs, this);
         GraphDash.setAdapter(gAdapter);
         StatAdapter sAdapter = new StatAdapter( this, (ArrayList<Stat>) Stats);
+        StatDash.setAdapter(sAdapter);
     }
 }

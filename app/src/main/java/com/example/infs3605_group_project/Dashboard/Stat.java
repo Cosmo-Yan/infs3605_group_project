@@ -2,9 +2,9 @@ package com.example.infs3605_group_project.Dashboard;
 
 public class Stat {
     private int number;
-    private int name;
+    private String name;
 
-    public Stat(int number, int name) {
+    public Stat(int number, String name) {
         this.number = number;
         this.name = name;
     }
@@ -17,11 +17,11 @@ public class Stat {
         this.number = number;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

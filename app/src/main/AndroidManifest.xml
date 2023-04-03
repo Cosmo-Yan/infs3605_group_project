@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FeedActivity">
+        </activity>
+
+        <activity
             android:name=".FormV2Controller">
     </activity>
         <activity

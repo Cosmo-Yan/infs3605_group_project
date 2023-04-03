@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.infs3605_group_project.Dashboard.DashboardActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FeedActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class FeedActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.dashboard:
-                        startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
