@@ -11,6 +11,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,18 +25,29 @@ import com.example.infs3605_group_project.FormV2Controller;
 import com.example.infs3605_group_project.R;
 
 import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -43,7 +55,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -57,6 +71,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ActivityDatabase mDb;
     private ArrayList<Graph> Graphs = new ArrayList<>();
     private ArrayList<Stat> Stats = new ArrayList<>();
+    private ArrayList<Chart> Charts= new ArrayList<>();
 
 
     @Override
@@ -108,6 +123,19 @@ public class DashboardActivity extends AppCompatActivity {
 
         //Create Graph Objects
         //Piechart of Event Types Example
+        Charts.add(typePieChart());
+        Charts.add(monthBarChart());
+
+        //Generate the adapter for the Recycler
+        //GridDashAdapter = new DashboardViewAdapter();
+        GraphDash.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)));
+        ChartAdapter cAdapter = new ChartAdapter((List<com.github.mikephil.charting.charts.Chart>) Charts);
+        GraphDash.setAdapter(cAdapter);
+        StatAdapter sAdapter = new StatAdapter( this, (ArrayList<Stat>) Stats);
+        StatDash.setAdapter(sAdapter);
+    }
+
+    public PieChart typePieChart(){
         PieChart typePieChart = new PieChart(getApplicationContext());
 
         List<PieEntry> entries = new ArrayList<>();
@@ -116,14 +144,9 @@ public class DashboardActivity extends AppCompatActivity {
             String label = activity.getEventType();
             entries.add(new PieEntry(value, label));
         }
-        //////////////////////
-
-        ////////////////
-
 
         PieDataSet pieSet = new PieDataSet(entries, "Event Type Breakdown");
 
-        /////////////
         HashMap<String, Float> labelValues = new HashMap<>();
 
 // Iterate through the entries and add the values for entries with the same label
@@ -146,11 +169,16 @@ public class DashboardActivity extends AppCompatActivity {
 
 // Create a new PieDataSet with the combined entries
         PieDataSet combinedDataSet = new PieDataSet(combinedEntries, "Combined Data");
-        ////////////////
 
         combinedDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         combinedDataSet.setValueTextColor(Color.BLACK);
         combinedDataSet.setValueTextSize(10f);
+
+        typePieChart.getDescription().setEnabled(false);
+        typePieChart.getLegend().setEnabled(true);
+        typePieChart.setEntryLabelColor(Color.BLACK);
+        typePieChart.setEntryLabelTextSize(10f);
+
 
 
         PieData data = new PieData(combinedDataSet);
@@ -159,71 +187,84 @@ public class DashboardActivity extends AppCompatActivity {
         data.setDrawValues(true);
         data.setValueFormatter(new PercentFormatter(typePieChart));
         typePieChart.setData(data);
-        typePieChart.getDescription().setEnabled(false);
-        typePieChart.getLegend().setEnabled(false);
-        typePieChart.setEntryLabelColor(Color.BLACK);
-        typePieChart.setEntryLabelTextSize(10f);
 
+        Description description = new Description();
+        description.setText("Breakdown of Events by Type");
+        typePieChart.setDescription(description);
 
-        typePieChart.measure(View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY));
+        typePieChart.invalidate();
 
-        typePieChart.layout(0, 0, typePieChart.getMeasuredWidth(), typePieChart.getMeasuredHeight());
-
-        Bitmap pieMap = typePieChart.getChartBitmap();
-
-
-
-        Graph eTypePie = new Graph(pieMap, "Event Type Breakdown");
-        Graphs.add(eTypePie);
-
+        return typePieChart;
+    }
+    public BarChart monthBarChart(){
         //Event Histogram
-        BarChart EventMonthHistogram = new BarChart(getApplicationContext());
-        List<Date> DateHistogramListMonth = new ArrayList<>();
-//        for (Event events : Dataset){
-//            Calendar cal = Calendar.getInstance();
-//            cal.setTime(events.getEventStartDate());
-//            int month = cal.get(Calendar.MONTH);
-//            DateHistogramListMonth.add(month);
-//        }
+        BarChart EventMonthHistogram = new HorizontalBarChart((getApplicationContext()));
+        Description description = new Description();
+        description.setText("Breakdown of Events by Month");
+        EventMonthHistogram.setDescription(description);
+        EventMonthHistogram.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        EventMonthHistogram.getDescription().setEnabled(false);
 
-        int[] monthCounts = new int[12];
-        for (Date events : DateHistogramListMonth) {
+        EventMonthHistogram.getLegend().setEnabled(false);
+        List<Integer> DateHistogramListMonth = new ArrayList<>();
+
+        for (Activity events : Dataset){
             Calendar cal = Calendar.getInstance();
-            cal.setTime(events);
-            int month = cal.get(Calendar.MONTH);
-            monthCounts[month]++;
+            String str[] = events.getEventStartDate().split("/");
+           int Month = Integer.valueOf(str[1]);
+
+            DateHistogramListMonth.add(Month);
         }
 
-        List<BarEntry> months = new ArrayList<>();
-        for (int i = 0; i < monthCounts.length; i++) {
-            months.add(new BarEntry(i, monthCounts[i]));
+        int[] counts = new int[12];
+        for (int event : DateHistogramListMonth){
+            int monthIndex = event - 1;
+            counts[monthIndex]++;
         }
-        BarDataSet dataSet = new BarDataSet(months, "Events Held");
+
+        List<Integer> eventslist = new ArrayList<>(counts.length);
+        for (int i : counts)
+        {
+            eventslist.add(i);
+        }
+
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+
+        for (int eventnum : eventslist) {
+            barEntries.add((new BarEntry(eventslist.indexOf(eventnum), eventnum)));
+        }
+
+        BarDataSet dataSet = new BarDataSet(barEntries, "Events Held");
         BarData barData = new BarData(dataSet);
+
         EventMonthHistogram.setData(barData);
 
-        EventMonthHistogram.measure(View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY));
+        // Set the X-axis labels
+//        String[] monthsList = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+//        XAxis xAxis = EventMonthHistogram.getXAxis();
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(monthsList));
 
-        EventMonthHistogram.layout(0, 0, EventMonthHistogram.getMeasuredWidth(), EventMonthHistogram.getMeasuredHeight());
+        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(EventMonthHistogram);
+        XAxis xAxis = EventMonthHistogram.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f); // only intervals of 1 day
+        xAxis.setLabelCount(12);
+        xAxis.setValueFormatter(xAxisFormatter);
 
-        Bitmap HistogramMap = EventMonthHistogram.getChartBitmap();
-
-        Graph EventMonthHistogramGraph = new Graph(HistogramMap, "Event Occurrence Breakdown Monthly");
-
-        Graphs.add(EventMonthHistogramGraph);
-
-        //Generate the adapter for the Recycler
-        //GridDashAdapter = new DashboardViewAdapter();
-        GraphDash.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)));
-        GraphAdapter gAdapter = new GraphAdapter( Graphs, this);
-        GraphDash.setAdapter(gAdapter);
-        StatAdapter sAdapter = new StatAdapter( this, (ArrayList<Stat>) Stats);
-        StatDash.setAdapter(sAdapter);
+        EventMonthHistogram.getAxisLeft().setEnabled(true);
 
 
-        System.out.println(String.valueOf(Graphs.size()));
+
+
+
+
+
+        EventMonthHistogram.invalidate();
+
+        return EventMonthHistogram;
     }
 }
+
+
 
