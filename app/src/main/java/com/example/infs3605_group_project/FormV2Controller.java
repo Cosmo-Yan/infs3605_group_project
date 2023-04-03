@@ -144,7 +144,7 @@ public class FormV2Controller extends AppCompatActivity {
     }
 
     // Get data from database and log all the data for debugging and proof of concept
-    private void getData() {
+    public void getData() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
