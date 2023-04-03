@@ -76,7 +76,6 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             }
         });
-
         //Create Stats
         //Number of Events
         System.out.println(""+ String.valueOf(Dataset.size()) + "");
