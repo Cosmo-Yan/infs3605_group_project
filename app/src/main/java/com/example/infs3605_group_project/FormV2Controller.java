@@ -3,6 +3,7 @@ package com.example.infs3605_group_project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -71,12 +73,9 @@ public class FormV2Controller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
 
-        // Load the database in the background
-        Log.d("Database debug","Step 1 - Load Room");
+        // Load the room database
         mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").fallbackToDestructiveMigration().build();
-        Log.d("Database debug","Step 2 Room loaded, Load Data");
-        getData();
-        Log.d("Database debug","Step 3");
+        debugData();
 
         //For the country auto complete textview
         AutoCompleteTextView countryAutoComplete = findViewById(R.id.countryAC);
@@ -141,22 +140,30 @@ public class FormV2Controller extends AppCompatActivity {
                 // Do nothing
             }
         });
+
+        Button submit = findViewById(R.id.nextButton);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submit();
+            }
+        });
     }
 
     // Get data from database and log all the data for debugging and proof of concept
-    private void getData() {
+    private void resetData() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 mDb.activityDao().deleteAll();
                 Activity activity;
-                activity = new Activity(1, "z12345678", "MAHE Academic exchange MoU signed", "H Vinod Bhat", "Education Exchange", "India", "Online", "29/06/2007", "\"The University of New South Wales has strengthened its teaching and research ties in India, signing a Memorandum of Understanding (MoU) with Manipal University last weekend (24 June).\"");
+                activity = new Activity(1, "z1234568", "MAHE Academic exchange MoU signed", "H Vinod Bhat", "Education Exchange", "India", "Online", "29/06/2007", "\"The University of New South Wales has strengthened its teaching and research ties in India, signing a Memorandum of Understanding (MoU) with Manipal University last weekend (24 June).\"");
                 mDb.activityDao().insertActivity(activity);
-                activity = new Activity(2, "z12345679", "CATTS MOU signed", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "17/07/2017", " a memorandum of understanding (MoU) was signed between UNSW and IAHE");
+                activity = new Activity(2, "z1234569", "CATTS MOU signed", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "17/07/2017", " a memorandum of understanding (MoU) was signed between UNSW and IAHE");
                 mDb.activityDao().insertActivity(activity);
-                activity = new Activity(3, "z12345680", "new centre in India", "Harinder Sidhu", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "19/07/2018", "UNSW Sydney's new India Centre in New Delhi is established");
+                activity = new Activity(3, "z1234560", "new centre in India", "Harinder Sidhu", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "19/07/2018", "UNSW Sydney's new India Centre in New Delhi is established");
                 mDb.activityDao().insertActivity(activity);
-                activity = new Activity(4, "z12345681", "CTET centre opened", "Zhongping Zhou", "Centre (int/domestic)", "China", "\"Shanghai, China\"", "21/11/2018", "first overseas research centre in china opened");
+                activity = new Activity(4, "z1234561", "CTET centre opened", "Zhongping Zhou", "Centre (int/domestic)", "China", "\"Shanghai, China\"", "21/11/2018", "first overseas research centre in china opened");
                 mDb.activityDao().insertActivity(activity);
                 activity = new Activity(5, "z12345682", "CTET agreement signed", "David Waite", "Centre (int/domestic)", "China", "\"Shanghai, China\"", "21/06/2019", "UNSW signed two agreements");
                 mDb.activityDao().insertActivity(activity);
@@ -190,6 +197,46 @@ public class FormV2Controller extends AppCompatActivity {
                 for(Activity temp: activityList){
                     Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
                 }
+            }
+        });
+    }
+
+    private void debugData() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                activityList = mDb.activityDao().getActivities();
+                for(Activity temp: activityList){
+                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
+                }
+            }
+        });
+    }
+
+
+    // Whenever the activity is submitted, it is entered into the database
+    public void submit(){
+        EditText temp = findViewById(R.id.eventName);
+        String eventName = temp.getText().toString();
+        temp = findViewById(R.id.orgName);
+        String orgName = temp.getText().toString();
+        AutoCompleteTextView tempAC = findViewById(R.id.countryAC);
+        String country = tempAC.getText().toString();
+        temp = findViewById(R.id.location);
+        String location = temp.getText().toString();
+        temp = findViewById(R.id.startDate);
+        String startDate = temp.getText().toString();
+        temp = findViewById(R.id.furtherDetails);
+        String details = temp.getText().toString();
+        tempAC = findViewById(R.id.eventAC);
+        String eventType = tempAC.getText().toString();
+        //Note ID should be autogenerated and zid should be based on login data - singleton?
+        Activity activity = new Activity(20,"z1234567",eventName,orgName,eventType,country,location,startDate,details);
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.activityDao().insertActivity(activity);
+                startActivity(new Intent(getApplicationContext(),FeedActivity.class));
             }
         });
     }
