@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class Activity {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @SerializedName("id")
     @Expose
@@ -53,6 +53,19 @@ public class Activity {
     private String image;   // String location for the image nullable with default value
 
     public Activity(@NonNull Integer id, String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
+        this.id = id;
+        this.zid = zid;
+        this.eventName = eventName;
+        this.nameOfOrganiser = nameOfOrganiser;
+        this.eventType = eventType;
+        this.country = country;
+        this.location = location;
+        this.eventStartDate = eventStartDate;
+        this.furtherDetails = furtherDetails;
+        this.image = image;
+    }
+
+    public Activity(String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
         this.id = id;
         this.zid = zid;
         this.eventName = eventName;
