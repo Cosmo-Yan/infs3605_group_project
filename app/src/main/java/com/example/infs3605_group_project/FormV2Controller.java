@@ -25,7 +25,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.SortedSet;
@@ -115,6 +117,19 @@ public class FormV2Controller extends AppCompatActivity {
                 startActivityForResult(iGallery, GALLERY_REQ_CODE);
             }
         });
+
+        //To prevent the edit text field to be uneditable
+        EditText uneditable = findViewById(R.id.startDate);
+        uneditable.setEnabled(false);
+
+        //To auto fill date into the Date edit text field
+        EditText autoDate = findViewById(R.id.startDate);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate = dateFormat.format(calendar.getTime());
+
+        autoDate.setText(currentDate);
 
          //For the event type dropdown menu
         autoCompleteTextView = findViewById(R.id.eventAC);
