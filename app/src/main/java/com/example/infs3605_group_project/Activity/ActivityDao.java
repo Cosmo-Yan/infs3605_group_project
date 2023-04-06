@@ -18,6 +18,10 @@ public interface ActivityDao {
 //    @Query("SELECT * FROM Activity WHERE symbol == :coinSymbol")
 //    Activity getActivity(Activity activity);
 
+    @Query("SELECT * FROM Activity WHERE zid == :input")
+    List<Activity> getActivity(String input);
+
+
     // Use @Delete to delete an Array list of objects
     // "..." is a Java operator that accepts an object or array list of objects as parameter
     @Delete

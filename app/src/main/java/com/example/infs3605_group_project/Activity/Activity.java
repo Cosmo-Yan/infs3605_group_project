@@ -21,7 +21,7 @@ public class Activity {
     @Expose
     private String eventName;
 
-    @SerializedName("eventName")
+    @SerializedName("userEntering")
     @Expose
     private String zid;
 
@@ -65,8 +65,7 @@ public class Activity {
         this.image = image;
     }
 
-    public Activity(String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails, String image) {
-        this.id = id;
+    public Activity(String eventName, String zid, String nameOfOrganiser, String eventType, String country, String location, String eventStartDate, String furtherDetails) {
         this.zid = zid;
         this.eventName = eventName;
         this.nameOfOrganiser = nameOfOrganiser;
