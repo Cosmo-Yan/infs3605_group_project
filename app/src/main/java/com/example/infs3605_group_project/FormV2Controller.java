@@ -128,7 +128,7 @@ public class FormV2Controller extends AppCompatActivity {
                 // Check if the input matches the regular expression
                 if (!s.toString().matches(regex)) {
                     // If the input does not match the regular expression, show an error message
-                    myEditText.setError("Invalid input format. Please enter one letter followed by 7 numbers (e.g., z123456).");
+                    myEditText.setError("Enter the name of the organiser");
                 } else {
                     // If the input matches the regular expression, clear the error message
                     myEditText.setError(null);

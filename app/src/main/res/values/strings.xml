@@ -24,6 +24,28 @@
         <item>Editorial Duty</item>
 
     </string-array>
+
+    <string-array name= "host_name">
+        <item>John Smith</item>
+        <item>Emily Chen</item>
+        <item>Jason Patel</item>
+        <item>Ashley Lee</item>
+        <item>David Thompson</item>
+        <item>Samantha Wright</item>
+        <item>Michael Carter</item>
+        <item>Rachel Kim</item>
+        <item>Rachel Yim</item>
+        <item>Michael Harter</item>
+        <item>Amy Chen</item>
+        <item>Amy Huang</item>
+        <item>Amy Water</item>
+        <item>David Copper</item>
+        <item>James Thompson</item>
+        <item>James Bond</item>
+        <item>Bruce Wayne</item>
+        <item>Bruce Patel</item>
+    </string-array>
+
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
