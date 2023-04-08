@@ -19,7 +19,10 @@ public interface ActivityDao {
 //    Activity getActivity(Activity activity);
 
     @Query("SELECT * FROM Activity WHERE zid == :input")
-    List<Activity> getActivity(String input);
+    List<Activity> getActivities(String input);
+
+    @Query("SELECT * FROM Activity WHERE id == :input")
+    Activity getActivityById(int input);
 
 
     // Use @Delete to delete an Array list of objects

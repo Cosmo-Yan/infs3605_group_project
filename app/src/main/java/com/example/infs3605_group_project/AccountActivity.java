@@ -2,6 +2,8 @@ package com.example.infs3605_group_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -15,22 +17,35 @@ import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.Data.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity implements HistRecyclerInterface{
 
     BottomNavigationView bottomNavigationView;
     User user;
-    private ActivityDatabase mDb;
+    List<Activity> activities;
 
+    private ActivityDatabase mDb;
+    private RecyclerView histList;
+    private HistAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activities = new ArrayList<Activity>();
         super.onCreate(savedInstanceState);
+
+        user = UserData.getInstance().loggedIn;
         setContentView(R.layout.activity_account);
         mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").fallbackToDestructiveMigration().build();
-        debugData();
+        loadData();
+
+        histList = findViewById(R.id.HistListView);
+        RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(getApplicationContext());
+        histList.setLayoutManager(layoutManager);
+        adapter = new HistAdapter(activities, this);
+        histList.setAdapter(adapter);
 
         bottomNavigationView= findViewById( R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.account);
@@ -64,30 +79,33 @@ public class AccountActivity extends AppCompatActivity {
                 return false;
             }
         });
-        user = UserData.getInstance().getLoggedIn();
         TextView usersName = findViewById(R.id.usersName);
         usersName.setText(user.getName());
     }
 
-    public void debugData(){
+    public void loadData(){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                List<Activity> activities = mDb.activityDao().getActivity("z1234567");
-                Log.i("activity found","<Start>");
-                for(Activity tempAct: activities){
-                    Log.i("activity found",tempAct.getEventName());
-                }
-                Log.i("activity found","<End>");
-                Log.i("All acts","<Start>");
-                activities = mDb.activityDao().getActivities();
-                for(Activity tempAct: activities){
-                    Log.i("Activity exists",tempAct.getEventName());
-                    if(tempAct.getZid().equals("z1234567")) {
-                        Log.i("Activity Is Ours", tempAct.getEventName());
+                activities = mDb.activityDao().getActivities(user.getzId());
+                Log.i("Activities",String.valueOf(activities.size()));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.update(activities);
                     }
-                }
+                });
             }
         });
+    }
+
+    @Override
+    public void onClick(int id) {
+        Log.i("Event pressed:",activities.get(id).getEventName());
+        int eId = activities.get(id).getId();
+        Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+        intent.putExtra("activityID",eId);
+        Log.i("id",String.valueOf(eId));
+        startActivity(intent);
     }
 }

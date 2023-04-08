@@ -41,7 +41,7 @@ public class UserData {
 
     public boolean Login(String username, String password){
         for(User tempUser: users){
-            if(tempUser.getUsername().equals(username)){
+            if(tempUser.getzId().equals(username)){
                 Log.i("Username correct",username);
                 if(tempUser.getPassword().equals(password)){
                     Log.i("Password Correct",password);

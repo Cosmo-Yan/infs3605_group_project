@@ -14,6 +14,9 @@
         android:theme="@style/Theme.INFS3605_group_project"
         tools:targetApi="31">
         <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewEventActivity"
             android:exported="false" />
         <activity

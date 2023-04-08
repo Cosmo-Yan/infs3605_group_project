@@ -29,13 +29,6 @@ public class LoginPage extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }
-//                if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
-//                    Toast.makeText(LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(getApplicationContext(),FeedActivity.class));
-//
-//                } else {
-//                    Toast.makeText(LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
     }
