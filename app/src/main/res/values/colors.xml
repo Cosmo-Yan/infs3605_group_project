@@ -11,5 +11,6 @@
 
     <color name="white">#FFFFFF</color>
     <color name="pastel_orange_light">#FBE8DF</color>
+    <color name="feedText">#717070</color>
 
 </resources>
