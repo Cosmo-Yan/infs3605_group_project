@@ -12,7 +12,7 @@
         <!-- Tertiary colour being UNSW colour black on yellow-->
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <item name="android:navigationBarColor">@color/black</item>
         <item name="android:itemBackground">?attr/colorPrimary</item>
         <item name="android:itemTextAppearance">?attr/colorPrimaryVariant</item>

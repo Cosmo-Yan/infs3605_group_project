@@ -14,4 +14,7 @@
     <color name="pastel_orange_light">#FBE8DF</color>
     <color name="feedText">#717070</color>
 
+<!--    Colours below defined to give accents-->
+    <color name="lighten">#24FFFFFF</color>
+
 </resources>

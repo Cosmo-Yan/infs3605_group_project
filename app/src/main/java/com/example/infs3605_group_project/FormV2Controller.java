@@ -141,7 +141,7 @@ public class FormV2Controller extends AppCompatActivity {
             }
         });
 
-        Button submit = findViewById(R.id.nextButton);
+        Button submit = findViewById(R.id.saveButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,6 +215,10 @@ public class FormV2Controller extends AppCompatActivity {
 
 
     // Whenever the activity is submitted, it is entered into the database
+    public void submit(View v) {
+        submit();
+    }
+
     public void submit(){
         EditText temp = findViewById(R.id.eventName);
         String eventName = temp.getText().toString();
@@ -239,6 +243,10 @@ public class FormV2Controller extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),FeedActivity.class));
             }
         });
+    }
+
+    public void cancel(View v){
+        finish();
     }
 
 }
