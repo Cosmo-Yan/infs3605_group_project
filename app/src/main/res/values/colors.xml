@@ -7,10 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
 
-    <color name="unsw">#F4DC01</color>
+    <color name="unsw">#EEEEEE</color>
+    <color name="login_color">#FFD025</color>
+
+    <color name="menu_nav">#FFD230</color>
+
+    <color name="form">#FFD230</color>
 
     <color name="white">#FFFFFF</color>
-    <color name="pastel_orange_light">#FBE8DF</color>
     <color name="feedText">#717070</color>
+
 
 </resources>

@@ -47,13 +47,12 @@
                     android:textColor="#070707"
                     android:textColorHint="#000000"
                     android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/screenName3" />
 
                 <EditText
                     android:id="@+id/eventName"
-                    android:layout_width="317dp"
+                    android:layout_width="320dp"
                     android:layout_height="51dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
@@ -165,13 +164,14 @@
                     android:layout_width="354dp"
                     android:layout_height="58dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/edit_text_border"
+                    android:background="@color/form"
                     android:ems="10"
                     android:hint="Upload image "
                     android:inputType="none"
                     android:textColorHint="#000000"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/furtherDetails" />
 
@@ -198,6 +198,7 @@
             android:layout_marginBottom="10dp"
             android:text="Next"
             android:textColor="#000000"
+            android:background="@drawable/button_colors"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

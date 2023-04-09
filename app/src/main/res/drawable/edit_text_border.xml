@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <!-- Currently this does not work -->
+    <!-- Currently this modifies the looks of the edit text views -->
     <shape xmlns:android="http://schemas.android.com/apk/res/android"
         android:shape="rectangle">
         <stroke

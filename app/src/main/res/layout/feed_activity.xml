@@ -12,13 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/purple_500"
+        app:itemBackground="@color/menu_nav"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu"
-
-
-        />
+        app:menu="@menu/menu"        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feedRecycleView"
