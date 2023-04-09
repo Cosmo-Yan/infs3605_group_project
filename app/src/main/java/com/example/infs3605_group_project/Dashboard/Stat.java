@@ -1,5 +1,9 @@
 package com.example.infs3605_group_project.Dashboard;
 
+/**
+ * Holds a number and the name of the statistic
+ * Needed to attach a label to the stat to be displayed
+ */
 public class Stat {
     private int number;
     private String name;
