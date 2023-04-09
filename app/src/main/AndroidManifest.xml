@@ -27,6 +27,10 @@
         </activity>
         <activity android:name=".NewEventActivity"
             ></activity>
+        <activity android:name=".Dashboard.DashboardGeneralDetailActivity"
+            android:screenOrientation="landscape"
+
+            ></activity>
 
         <activity
             android:name=".FormV2Controller">

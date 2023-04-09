@@ -1,9 +1,11 @@
 package com.example.infs3605_group_project.Dashboard;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,9 +26,12 @@ public class ChartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<ChartObjects> charts = new ArrayList<>();
 
     private List<ChartObjects> mCharts;
+    private DashClickInterface listener;
 
-    public ChartAdapter(List<ChartObjects> charts) {
+
+    public ChartAdapter(List<ChartObjects> charts, DashClickInterface listener) {
         mCharts = charts;
+        this.listener = listener;
     }
 
     @Override
@@ -56,16 +61,35 @@ public class ChartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ChartObjects chart = mCharts.get(position);
         if (holder instanceof PieChartViewHolder) {
             PieChartViewHolder pieChartViewHolder = (PieChartViewHolder) holder;
 //            pieChartViewHolder.bind(chart.getChart());
             pieChartViewHolder.bind(mCharts.get(position).getChart());
-        } else if (holder instanceof BarChartViewHolder) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    listener.onPieItemClick((PieChart) mCharts.get(position).getChart());
+
+                    }
+                });
+        }
+        else if (holder instanceof BarChartViewHolder) {
             BarAxis baxis = new BarAxis(null, (BarChart) chart.getChart(), chart.getAxisSuper());
             BarChartViewHolder barChartViewHolder = (BarChartViewHolder) holder;
             barChartViewHolder.bind(chart.getChart(), baxis.getAxis());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    listener.onBarItemClick((BarChart)mCharts.get(position).getChart(), baxis.getAxis());
+                }
+            });
+
         } else {
             throw new IllegalArgumentException("Unknown view holder type");
         }
@@ -111,14 +135,6 @@ public class ChartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             mBarChart = itemView.findViewById(R.id.barChart_detail);
             mBarText = itemView.findViewById(R.id.label_text);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(dvi != null){
-//                        dvi.onItemClick((String) itemView.getTag());
-//                    }
-//                }
-//            });
         }
 
         public void bind(Chart chart, ArrayList<String> axis) {
@@ -132,6 +148,8 @@ public class ChartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
             mBarChart.getXAxis().setDrawGridLines(false);
+            mBarChart.getAxisLeft().setDrawGridLines(false);
+            mBarChart.getAxisRight().setDrawGridLines(false);
             mBarChart.getXAxis().setGranularity(0.5f); // only intervals of 1 day
             System.out.println(chart.getDescription().getText() + "" + axis.size());
 

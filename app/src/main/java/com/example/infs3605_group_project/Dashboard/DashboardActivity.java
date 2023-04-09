@@ -2,17 +2,29 @@ package com.example.infs3605_group_project.Dashboard;
 
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Spinner;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -22,8 +34,9 @@ import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +46,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -60,8 +72,12 @@ public class DashboardActivity extends AppCompatActivity {
     private ArrayList<Activity> Dataset = new ArrayList<>();
     private ActivityDatabase mDb;
     private ArrayList<Graph> Graphs = new ArrayList<>();
-    private ArrayList<Stat> Stats = new ArrayList<>();
     private ArrayList<ChartObjects> Charts= new ArrayList<>();
+
+    private Spinner yearSpinner;
+    private Spinner countrySpinner;
+
+    private Filter filters = new Filter("Year", "Country");
 
 
     @Override
@@ -69,6 +85,7 @@ public class DashboardActivity extends AppCompatActivity {
         //Load xml
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+        setTitle("Dashboard");
 
         //Connect Local Variable to xml elements
         GraphDash = findViewById(R.id.Graph_Recycler);
@@ -79,39 +96,14 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-        //Create Stats
-        //Number of Events
-        Stats.add(new Stat(Dataset.size(), "Number of Events Overall:"));
-
-        //
-        HashSet noDuplicate = new HashSet();
-        for (Activity active: Dataset){
-            noDuplicate.add(active.getCountry());
-        }
-        Stats.add(new Stat(noDuplicate.size(), "Number of Countries Participating:"));
-        for (Activity active: Dataset){
-            noDuplicate.add(active.getLocation());
-        }
-        Stats.add(new Stat(noDuplicate.size(), "Number of Active Locations:"));
+        setAdapters();
 
 
 
 
-        //Create Graph Objects
-        //Piechart of Event Types Example
-        Charts.add(new PieObject(null, typePieChart(Dataset)));
-        Charts.add(new BarAxis(null, monthBarChart(Dataset).getChart(), monthBarChart(Dataset).getAxisSuper() ));
-        Charts.add(new BarAxis(null, countryBar(Dataset).getChart(), countryBar(Dataset).getAxisSuper()));
 
 
-        //Generate the adapter for the Recycler
-        //GridDashAdapter = new DashboardViewAdapter();
-        GraphDash.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)));
-        ChartAdapter cAdapter = new ChartAdapter(Charts);
-        cAdapter.notifyDataSetChanged();
-        GraphDash.setAdapter(cAdapter);
-        StatAdapter sAdapter = new StatAdapter( this, (ArrayList<Stat>) Stats);
-        StatDash.setAdapter(sAdapter);
+
     }
 
     private ArrayList<Activity> getDefaultDataset(){
@@ -145,25 +137,119 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dashboard_menu, menu);
 
-        return true;
+        MenuItem yearSpinnerItem = menu.findItem(R.id.year_spinner);
+        final Spinner yearSpinner = (Spinner) yearSpinnerItem.getActionView();
+
+        final ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, getYears());
+
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearSpinner.setAdapter(yearAdapter);
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(yearSpinner.getSelectedItem().toString());
+                filters.setYear(yearSpinner.getSelectedItem().toString());
+                filterData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+        MenuItem countrySpinnerItem = menu.findItem(R.id.country_spinner);
+        countrySpinner = (Spinner) countrySpinnerItem.getActionView();
+
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, getCountries()
+        );
+
+        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        countrySpinner.setAdapter(countryAdapter);
+
+        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filters.setCountry(countrySpinner.getSelectedItem().toString());
+                filterData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.filter_Country:
-//                GraphDash.sort(CoinViewAdapter.SORT_METHOD_NAME);
-                break;
-            case R.id.filter_year:
-//                GraphDash.sort(2);
-                break;
+            case R.id.Default:
+                recreate();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    private ArrayList<String> getYears() {
+        ArrayList<String> years = new ArrayList<>();
+        ArrayList<Activity> temp = new ArrayList<>();
+        temp = getDefaultDataset();
+
+        HashSet noDuplicate = new HashSet();
+        List<Integer> DateHistogramListMonth = new ArrayList<>();
+        for (Activity events : temp){
+            String str[] = events.getEventStartDate().split("/");
+            String year = str[2];
+            noDuplicate.add(year);
+        }
+        years.addAll(noDuplicate);
+        Collections.sort(years);
+        years.add(0, "Year");
+
+
+        System.out.println(years);
+
+
+        return years;
+    }
+
+    private ArrayList<String> getCountries() {
+        ArrayList<String> countries = new ArrayList<>();
+
+        ArrayList<Activity> temp = new ArrayList<>();
+        temp = getDefaultDataset();
+
+        HashSet noDuplicate = new HashSet();
+        List<Integer> DateHistogramListMonth = new ArrayList<>();
+        for (Activity events : temp){
+            String country = events.getCountry();
+            noDuplicate.add(country);
+        }
+
+        countries.addAll(noDuplicate);
+        Collections.sort(countries);
+        countries.add(0, "Country");
+
+        return countries;
     }
 
     public PieChart typePieChart(ArrayList<Activity> Data){
@@ -270,6 +356,8 @@ public class DashboardActivity extends AppCompatActivity {
         BarDataSet dataSet = new BarDataSet(barEntries, "Events Held");
 
         dataSet.setBarBorderWidth(0.5f);
+
+
 
 
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -388,7 +476,208 @@ public class DashboardActivity extends AppCompatActivity {
         legend.setEnabled(false); // disable the legend
         return new BarAxis(null, chart, (ArrayList<String>) countries);
     }
-}
+
+    private ArrayList<Stat> getStats(ArrayList<Activity> set){
+        //Create Stats
+        //Number of Events
+        ArrayList<Stat> statsList = new ArrayList<Stat>();
+        statsList.add(new Stat(set.size(), "Number of Events Overall:"));
+
+        //
+        HashSet noDuplicate = new HashSet();
+        for (Activity active: set){
+            noDuplicate.add(active.getCountry());
+        }
+        statsList.add(new Stat(noDuplicate.size(), "Number of Countries Participating:"));
+        for (Activity active: set){
+            noDuplicate.add(active.getLocation());
+        }
+        statsList.add(new Stat(noDuplicate.size(), "Number of Active Locations:"));
+
+        return statsList;
+    }
+
+    private ArrayList<ChartObjects> getGraphs(ArrayList<Activity> set){
+        ArrayList<ChartObjects> gGraph = new ArrayList<>();
+        gGraph.add(new PieObject(null, typePieChart(Dataset)));
+        gGraph.add(new BarAxis(null, monthBarChart(Dataset).getChart(), monthBarChart(Dataset).getAxisSuper() ));
+        gGraph.add(new BarAxis(null, countryBar(Dataset).getChart(), countryBar(Dataset).getAxisSuper()));
+
+        return gGraph;
+    }
+    private void setAdapters(){
+        //Create Graph Objects
+        //Piechart of Event Types Example
+
+
+        //Generate the adapter for the Recycler
+        //GridDashAdapter = new DashboardViewAdapter();
+        GraphDash.setLayoutManager((new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)));
+        ChartAdapter cAdapter = new ChartAdapter(getGraphs(Dataset), new DashClickInterface() {
+            @Override
+            public void onBarItemClick(BarChart bar, ArrayList<String> Axis) {
+                Intent intent = new Intent(DashboardActivity.this, DashboardGeneralDetailActivity.class);
+                // Serialize the chart data to a byte array
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                bar.measure(View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.makeMeasureSpec(screenWidth, View.MeasureSpec.EXACTLY));
+
+                bar.layout(0, 0, bar.getMeasuredWidth(), bar.getMeasuredHeight());
+
+                bar.getXAxis().setValueFormatter(new IndexAxisValueFormatter(Axis));
+                bar.getLegend().setEnabled(false);
+                bar.getXAxis().setLabelCount(Axis.size(), false);
+                bar.getDescription().setEnabled(false);
+                bar.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+
+
+                bar.getXAxis().setDrawGridLines(false);
+                bar.getXAxis().setGranularity(0.5f); // only intervals of 1 day
+
+
+
+                bar.setVisibleXRange(1f, Axis.size());
+                bar.getAxisLeft().setAxisMinimum(0);
+
+                bar.getBarData().setValueTextSize(12f);
+
+                bar.getAxisLeft().setDrawGridLines(false);
+                bar.getXAxis().setDrawGridLines(false);
+                bar.getAxisRight().setDrawGridLines(false);
+
+
+                bar.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                bar.getXAxis().setLabelRotationAngle(-90);
+
+                Bitmap barMap = bar.getChartBitmap();
+
+                barMap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+                byte[] chartData = stream.toByteArray();
+
+                // Pass the chart data as an extra to the new activity
+                intent.putExtra("chartData", chartData);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onPieItemClick(PieChart pieC) {
+                Intent intent = new Intent(DashboardActivity.this, DashboardGeneralDetailActivity.class);
+                // Serialize the chart data to a byte array
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                pieC.measure(View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.makeMeasureSpec(screenWidth, View.MeasureSpec.EXACTLY));
+
+                pieC.layout(0, 0, pieC.getMeasuredWidth(), pieC.getMeasuredHeight());
+
+                pieC.setUsePercentValues(true);
+                pieC.setEntryLabelColor(Color.BLACK);
+                pieC.getLegend().setEnabled(false);
+                pieC.setDrawCenterText(false);
+                pieC.getDescription().setEnabled(false);
+
+                Bitmap pieMap = pieC.getChartBitmap();
+
+                pieMap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+                byte[] chartData = stream.toByteArray();
+
+                // Pass the chart data as an extra to the new activity
+                intent.putExtra("chartData", chartData);
+                startActivity(intent);
+            }
+        });
+        cAdapter.notifyDataSetChanged();
+        GraphDash.setAdapter(cAdapter);
+        StatAdapter sAdapter = new StatAdapter( this, getStats(Dataset));
+        StatDash.setAdapter(sAdapter);
+    }
+    private void filterData(){
+        Dataset.clear();
+        Dataset.addAll(getDefaultDataset());
+        ArrayList<Activity> filteredData = new ArrayList<>();
+
+//        String year = yearSpinner.getSelectedItem().toString();
+        ArrayList<Activity> filter = new ArrayList<>();
+
+
+        ArrayList<Activity> temp = new ArrayList<>();
+        ArrayList<String> yearselect = new ArrayList<>();
+        for (Activity events : Dataset) {
+            String str[] = events.getEventStartDate().split("/");
+            String years1 = str[2];
+            yearselect.add(years1);
+        }
+
+        Boolean checkCountry = new Boolean(true);
+        if (filters.getCountry() == null || filters.getCountry() == "Country"){
+            checkCountry = false;
+        }
+
+        Boolean checkYear = new Boolean(true);
+        if (filters.getYear() == null || filters.getYear() == "Year"){
+            checkYear = false;
+        }
+
+        Boolean checkBoth = new Boolean(false);
+        if (checkCountry == true && checkYear == true){
+            checkBoth = true;
+            checkCountry = false;
+            checkYear = false;
+        }
+
+
+
+        System.out.println("year" + checkYear);
+        System.out.println("country" + checkCountry);
+        System.out.println("both" + checkBoth);
+
+
+        if (checkBoth == true){
+            for (Activity act: Dataset){
+                if (act.getCountry().contains(filters.getCountry())
+                        && yearselect.get(Dataset.indexOf(act)).contains(filters.getYear())){
+                    filteredData.add(act);
+                }
+            }
+        }
+        else if (checkYear == true){
+            for (Activity act: Dataset){
+                if (yearselect.get(Dataset.indexOf(act)).contains(filters.getYear())){
+                    filteredData.add(act);
+                }
+            }
+        }
+        else if (checkCountry == true){
+            for (Activity act: Dataset){
+                if (act.getCountry().contains(filters.getCountry())){
+                    filteredData.add(act);
+                }
+            }
+        }
+        else{
+            return;
+        }
+
+            Dataset.clear();
+            Dataset.addAll(filteredData);
+            setAdapters();
+        }
+    }
+
 
 
 
