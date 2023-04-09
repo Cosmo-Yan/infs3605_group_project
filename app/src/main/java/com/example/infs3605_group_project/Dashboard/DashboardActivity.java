@@ -4,6 +4,7 @@ package com.example.infs3605_group_project.Dashboard;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.GridView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -319,6 +321,7 @@ public class DashboardActivity extends AppCompatActivity {
      * @param Data Data to be used in BarChart Creation
      * @return BarChart of Selected Data, Event Breakdown by Month
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public BarAxis monthBarChart(ArrayList<Activity> Data){
         BarChart EventMonthHistogram = new HorizontalBarChart((getApplicationContext()));
 
@@ -327,32 +330,25 @@ public class DashboardActivity extends AppCompatActivity {
         description.setText("Breakdown of Events by Month");
         EventMonthHistogram.setDescription(description);
 
-        //Splits Date String into Month and Saves it into an ArrayList
-        List<Integer> DateHistogramListMonth = new ArrayList<>();
-        for (Activity events : Data){
-            String str[] = events.getEventStartDate().split("/");
-            int Month = Integer.valueOf(str[1]);
-            DateHistogramListMonth.add(Month);
+        //Counts Month Occurrences
+        Map<String, Integer> monthCounts = new HashMap<>();
+        for (Activity event : Dataset) {
+            String str[] = event.getEventStartDate().split("/");
+            int month = Integer.valueOf(str[1]);
+            String monthName = getMonthName(String.valueOf(month));
+            monthCounts.put(monthName, monthCounts.getOrDefault(monthName, 0) + 1);
         }
 
-        //Counts the number of occurrences of each month into an array
-        int[] counts = new int[11];
-        for (int event : DateHistogramListMonth){
-            int monthIndex = event - 1;
-            counts[monthIndex]++;
-        }
+        // Creates BarEntry objects
+        List<BarEntry> barEntries = new ArrayList<>();
 
-        //Converts the array into an ArrayList
-        List<Integer> eventslist = new ArrayList<>();
-        for (int i : counts)
-        {
-            eventslist.add(i);
-        }
-
-        //Creates BarEntry Objects
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        for (int eventnum : eventslist) {
-            barEntries.add((new BarEntry(eventslist.indexOf(eventnum), eventnum)));
+        // Creates ArrayList of Axis values
+        ArrayList<String> monthList = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            String monthName = getMonthName(String.valueOf(i));
+            int count = monthCounts.getOrDefault(monthName, 0);
+            barEntries.add(new BarEntry(i - 1, count));
+            monthList.add(monthName);
         }
 
         //Converts the BarEntryObjects into a BarDataSet
@@ -371,21 +367,6 @@ public class DashboardActivity extends AppCompatActivity {
         //Sets Data
         EventMonthHistogram.setData(barData);
 
-        // Creates Arraylist of Months for the custom axis
-        List<String> monthsList = new ArrayList<String>();
-        monthsList.add("Jan");
-        monthsList.add("Feb");
-        monthsList.add("Mar");
-        monthsList.add("Apr");
-        monthsList.add("May");
-        monthsList.add("Jun");
-        monthsList.add("Jul");
-        monthsList.add("Aug");
-        monthsList.add("Sep");
-        monthsList.add("Oct");
-        monthsList.add("Nov");
-        monthsList.add("Dec");
-
         //Alters Look of BarChart
         EventMonthHistogram.getAxisLeft().setEnabled(true);
 
@@ -393,7 +374,7 @@ public class DashboardActivity extends AppCompatActivity {
         EventMonthHistogram.invalidate();
 
         //Creates BarAxis object with the BarChart and Axis value ArrayList. the null is for the supertype
-        return new BarAxis(null, EventMonthHistogram, (ArrayList<String>) monthsList);
+        return new BarAxis(null, EventMonthHistogram, (ArrayList<String>) monthList);
     }
 
     public BarAxis countryBar(ArrayList<Activity> data){
@@ -480,7 +461,9 @@ public class DashboardActivity extends AppCompatActivity {
     private ArrayList<ChartObjects> getGraphs(){
         ArrayList<ChartObjects> gGraph = new ArrayList<>();
         gGraph.add(new PieObject(null, typePieChart(Dataset)));
-        gGraph.add(new BarAxis(null, monthBarChart(Dataset).getChart(), monthBarChart(Dataset).getAxisSuper() ));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            gGraph.add(new BarAxis(null, monthBarChart(Dataset).getChart(), monthBarChart(Dataset).getAxisSuper() ));
+        }
         gGraph.add(new BarAxis(null, countryBar(Dataset).getChart(), countryBar(Dataset).getAxisSuper()));
         return gGraph;
     }
@@ -639,5 +622,54 @@ public class DashboardActivity extends AppCompatActivity {
         Dataset.addAll(filteredData);
         //Resets Adapters using new Dataset
         setAdapters();
+        }
+
+        public String getMonthName(String num){
+            int monthNum = Integer.parseInt(num);
+
+            String monthName;
+            switch (monthNum) {
+                case 1:
+                    monthName = "Jan";
+                    break;
+                case 2:
+                    monthName = "Feb";
+                    break;
+                case 3:
+                    monthName = "Mar";
+                    break;
+                case 4:
+                    monthName = "Apr";
+                    break;
+                case 5:
+                    monthName = "May";
+                    break;
+                case 6:
+                    monthName = "Jun";
+                    break;
+                case 7:
+                    monthName = "Jul";
+                    break;
+                case 8:
+                    monthName = "Aug";
+                    break;
+                case 9:
+                    monthName = "Sep";
+                    break;
+                case 10:
+                    monthName = "Oct";
+                    break;
+                case 11:
+                    monthName = "Nov";
+                    break;
+                case 12:
+                    monthName = "Dec";
+                    break;
+                default:
+                    monthName = "Invalid month number";
+                    break;
+            }
+
+            return(monthName);
         }
     }
