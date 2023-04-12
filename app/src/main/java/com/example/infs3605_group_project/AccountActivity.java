@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.Data.User;
+import com.example.infs3605_group_project.Dashboard.DashboardActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class AccountActivity extends AppCompatActivity implements HistRecyclerIn
                 switch(item.getItemId())
                 {
                     case R.id.dashboard:
-                        startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

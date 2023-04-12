@@ -142,16 +142,15 @@ public class FormV2Controller extends AppCompatActivity {
         });
 
         Button submit = findViewById(R.id.saveButton);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submit();
-            }
-        });
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                submit();
+//            }
+//        });
     }
 
-    // Get data from database and log all the data for debugging and proof of concept
-    private void resetData() {
+    public void getData() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {

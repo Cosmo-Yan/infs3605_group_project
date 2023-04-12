@@ -1,7 +1,6 @@
 package com.example.infs3605_group_project.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
