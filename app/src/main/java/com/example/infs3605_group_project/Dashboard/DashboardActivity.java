@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.infs3605_group_project.AccountActivity;
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
+import com.example.infs3605_group_project.FeedActivity;
+import com.example.infs3605_group_project.NewEventActivity;
 import com.example.infs3605_group_project.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -40,6 +44,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -64,6 +69,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Spinner yearSpinner;
     private Spinner countrySpinner;
     private Filter filters = new Filter("Year", "Country");
+    BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -77,11 +83,43 @@ public class DashboardActivity extends AppCompatActivity {
         //Connect Local Variable to xml elements
         GraphDash = findViewById(R.id.Graph_Recycler);
         StatDash = findViewById(R.id.Stat_grid);
+        bottomNavigationView= findViewById( R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.dashboard);
 
         //Fills Dataset variable with Data from Database
         Dataset = getDefaultDataset();
         //Sets the adapters for the RecyclerView and GridView
         setAdapters();
+        //Handles Navigation Bar
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId())
+                {
+                    case R.id.dashboard:
+                        return true;
+
+                    case R.id.feed:
+                        startActivity(new Intent(getApplicationContext(), FeedActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.account:
+                        startActivity(new Intent(getApplicationContext(), AccountActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.newEvent:
+                        startActivity(new Intent(getApplicationContext(), NewEventActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                }
+
+
+                return false;
+            }
+        });
     }
 
     /**
