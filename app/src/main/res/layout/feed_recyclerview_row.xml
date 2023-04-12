@@ -3,26 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/black"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/unsw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/lighten">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -34,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
+<!--            android:textColor = "@color/black"-->
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -41,7 +44,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:text="TextView"
-                android:textColor = "@color/black"
+                android:textColor="@color/unsw"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 

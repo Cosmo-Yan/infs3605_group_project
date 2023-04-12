@@ -5,17 +5,17 @@
     <color name="purple_700">#FFEB3B</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+<!--    <color name="pastel_orange_light">#FBE8DF</color>-->
+
+<!--    Colours below are part of the UNSW design colours-->
     <color name="black">#FF000000</color>
-
-    <color name="unsw">#EEEEEE</color>
     <color name="login_color">#FFD025</color>
-
     <color name="menu_nav">#FFD230</color>
-
     <color name="form">#FFD230</color>
-
+    <color name="unsw">#F4DC00</color>
     <color name="white">#FFFFFF</color>
     <color name="feedText">#717070</color>
 
-
+<!--    Colours below defined to give accents-->
+    <color name="lighten">#24FFFFFF</color>
 </resources>

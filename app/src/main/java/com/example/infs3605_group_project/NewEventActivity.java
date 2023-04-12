@@ -18,6 +18,8 @@ public class NewEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
 
+        startActivity(new Intent(getApplicationContext(),FormV2Controller.class));
+
         bottomNavigationView= findViewById( R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.newEvent);
 
@@ -43,9 +45,7 @@ public class NewEventActivity extends AppCompatActivity {
 
                     case R.id.newEvent:
                         return true;
-
                 }
-
 
                 return false;
             }

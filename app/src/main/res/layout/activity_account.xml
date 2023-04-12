@@ -6,27 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".AccountActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Account"
-        android:layout_centerInParent="true"
-        android:gravity = "center"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav"
+        android:layout_marginBottom="0dp">
 
-        />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HistoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/History"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/histTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Past Activities"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/History"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HistoryTitle">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/HistListView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/usersName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Users Name"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--        app:itemBackground="@color/black"-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/menu_nav"
+        app:itemBackground="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu"
-
-
         />
 
 </RelativeLayout>
