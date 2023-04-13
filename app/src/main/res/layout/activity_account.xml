@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_nav"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/imageView"
@@ -23,14 +24,14 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/HistoryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="?attr/colorOnPrimary"
+            android:background="@color/lighten"
             app:layout_constraintBottom_toTopOf="@+id/History"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Users Name"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

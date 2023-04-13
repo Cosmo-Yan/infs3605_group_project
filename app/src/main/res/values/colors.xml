@@ -18,4 +18,5 @@
 
 <!--    Colours below defined to give accents-->
     <color name="lighten">#24FFFFFF</color>
+    <color name="light_blue">#2daae2</color>
 </resources>
