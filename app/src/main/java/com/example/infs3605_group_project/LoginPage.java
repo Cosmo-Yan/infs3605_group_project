@@ -1,6 +1,7 @@
 package com.example.infs3605_group_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.infs3605_group_project.Activity.ActivityDatabase;
+import com.example.infs3605_group_project.Data.GenericMethods;
+import com.example.infs3605_group_project.Data.User;
+
 public class LoginPage extends AppCompatActivity {
     EditText username;
     EditText password;
@@ -31,5 +37,6 @@ public class LoginPage extends AppCompatActivity {
                 }
             }
         });
+        GenericMethods.insertDummyData(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").fallbackToDestructiveMigration().build());
     }
 }

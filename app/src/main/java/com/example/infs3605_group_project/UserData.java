@@ -3,9 +3,14 @@ package com.example.infs3605_group_project;
 
 import android.util.Log;
 
+import com.example.infs3605_group_project.Activity.Activity;
+import com.example.infs3605_group_project.Activity.ActivityDao;
+import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.Data.User;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
 
 
 public class UserData {
@@ -57,4 +62,5 @@ public class UserData {
     public User getLoggedIn(){
         return loggedIn;
     }
+
 }

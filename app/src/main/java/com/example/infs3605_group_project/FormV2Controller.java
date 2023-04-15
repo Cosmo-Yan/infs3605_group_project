@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
+import com.example.infs3605_group_project.Data.GenericMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,38 +109,40 @@ public class FormV2Controller extends AppCompatActivity {
 
         EditText myEditText = findViewById(R.id.orgName);
 
-        myEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Do nothing
-            }
-
-            //   String regex key:
-            //       ^: The start of the string
-            //       [A-Za-z]: One uppercase or lowercase letter
-            //       \\d{7}: Seven digits (numbers)
-            //       $: The end of the string
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Define the regular expression for the specific format
-                String regex = "^[z]\\d{7}$";
-
-                // Check if the input matches the regular expression
-                if (!s.toString().matches(regex)) {
-                    // If the input does not match the regular expression, show an error message
-                    myEditText.setError("Enter the name of the organiser");
-                } else {
-                    // If the input matches the regular expression, clear the error message
-                    myEditText.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Do nothing
-            }
-        });
+//        myEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // Do nothing
+//            }
+//
+//            //   String regex key:
+//            //       ^: The start of the string
+//            //       [A-Za-z]: One uppercase or lowercase letter
+//            //       \\d{7}: Seven digits (numbers)
+//            //       $: The end of the string
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                // Define the regular expression for the specific format
+//                String regex = "^[z]\\d{7}$";
+//
+//                // Check if the input matches the regular expression
+//                if (!s.toString().matches(regex)) {
+//                    // If the input does not match the regular expression, show an error message
+//                    myEditText.setError("Enter the name of the organiser");
+//                } else {
+//                    // If the input matches the regular expression, clear the error message
+//                    myEditText.setError(null);
+//                }
+//            }
+//
+//
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // Do nothing
+//            }
+//        });
 
         Button submit = findViewById(R.id.saveButton);
 //        submit.setOnClickListener(new View.OnClickListener() {
@@ -150,90 +153,69 @@ public class FormV2Controller extends AppCompatActivity {
 //        });
     }
 
-    public void getData() {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.activityDao().deleteAll();
-                Activity activity;
-                activity = new Activity(1, "z1234568", "MAHE Academic exchange MoU signed", "H Vinod Bhat", "Education Exchange", "India", "Online", "29/06/2007", "\"The University of New South Wales has strengthened its teaching and research ties in India, signing a Memorandum of Understanding (MoU) with Manipal University last weekend (24 June).\"");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(2, "z1234567", "CATTS MOU signed", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "17/07/2017", " a memorandum of understanding (MoU) was signed between UNSW and IAHE");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(3, "z1234560", "new centre in India", "Harinder Sidhu", "Centre (int/domestic)", "India", "\"New Dheli, India\"", "19/07/2018", "UNSW Sydney's new India Centre in New Delhi is established");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(4, "z1234561", "CTET centre opened", "Zhongping Zhou", "Centre (int/domestic)", "China", "\"Shanghai, China\"", "21/11/2018", "first overseas research centre in china opened");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(5, "z12345682", "CTET agreement signed", "David Waite", "Centre (int/domestic)", "China", "\"Shanghai, China\"", "21/06/2019", "UNSW signed two agreements");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(6, "z1234567", "CATTS Indian delegations go to UNSW", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "\"Sydney, Australia\"", "18/07/2019", "\"a high-level delegation from the Government of India to UNSW, as well as conversations as follow-up to the MoU and to further discuss the creation of the centre of excellence as indicated in the MoU.\"");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(7, "z12345684", "MAHE Academic exchange program set up", "H Vinod Bhat", "Education Exchange", "India", "Online", "5/08/2019", "partnership seeks to promote academic and educational exchange between UNSW and Manipal Academy of Higher Education and establishes a joint seed fund for research collaborations.");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(8, "z1234567", "CATTS Final draft agreement approved", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "Online", "19/07/2020", "Final draft is agreed upon");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(9, "z1234567", "CATTS funding given", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "Online", "16/07/2021", "New ");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(10, "z12345687", "INFS UNSW exhange program proposition", "UNSW business school", "Education Exchange", "China", "\"Shanghai, China\"", "27/01/2023", "30 students will go to china for the infs course and will gain international industry experience once the program is approved");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(11, "z12345688", "INFS UNSW exhange program start", "UNSW business school", "Education Exchange", "China", "\"Shanghai, China\"", "5/05/2023", "30 students applied and meet the criteria for the program");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(12, "z12345689", "INFS UNSW exhange program great wall visit", "UNSW business school", "Education Exchange", "China", "\"Shanghai, China\"", "12/05/2023", "Students went to the great wall and saw how the business operates and worked with process managers to understand the efficencies and bottlenecks that have naturally come with a  company of that size");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(13, "z12345690", "INFS UNSW exhange program end", "UNSW business school", "Education Exchange", "China", "\"Shanghai, China\"", "22/05/2023", "Students return to UNSW as the program comes to an end");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(14, "z12345691", "UNSW Japan exhange program", "Keiichi Tsuchiya", "Education Exchange", "Japan", "\"Tokyo, Japan\"", "20/05/2023", "30 UNSW student learning Japanese went on an exchange program and will be living in japan");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(15, "z12345692", "UNSW Japan exhange program", "Keiichi Tsuchiya", "Education Exchange", "Japan", "\"Tokyo, Japan\"", "25/05/2023", "Students visit Toyota and understand the role of translaters in meetings with individuals of high value");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(16, "z12345693", "UNSW Japan exhange program", "Keiichi Tsuchiya", "Education Exchange", "Japan", "\"Tokyo, Japan\"", "28/05/2023", "Students return to UNSW and the program ends for the term");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(17, "z12345694", "CATTS state inspected", "Shri Sanjeev Kumar", "Centre (int/domestic)", "India", "\"Sydney, Australia\"", "7/04/2024", "\"To see how what progress is being made with the CATTs centre, an inspection was organised to see how it would operate in normal circumstances\"");
-                mDb.activityDao().insertActivity(activity);
-                activity = new Activity(18, "z12345695", "MAHE international partners event", "H Vinod Bhat", "Relations event", "India", "\"New Dheli, India\"", "21/03/2023", "A regular social event was attended by our deligates to network with MAHE and other universities in India");
-                mDb.activityDao().insertActivity(activity);
-                activityList = mDb.activityDao().getActivities();
-                for(Activity temp: activityList){
-                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
-                }
-            }
-        });
-    }
-
-    private void debugData() {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                activityList = mDb.activityDao().getActivities();
-                for(Activity temp: activityList){
-                    Log.i("Activity",String.valueOf(temp.getId())+" "+temp.getEventName());
-                }
-            }
-        });
-    }
-
-
     // Whenever the activity is submitted, it is entered into the database
     public void submit(View v) {
         submit();
     }
 
     public void submit(){
+        boolean inputError = false;
+
+
+        // Extract and validate data on page
         EditText temp = findViewById(R.id.eventName);
         String eventName = temp.getText().toString();
+        if(eventName.length()==0){
+            temp.setError("Please Enter an Event Name");
+            inputError = true;
+        }
+
         temp = findViewById(R.id.orgName);
         String orgName = temp.getText().toString();
+        if(eventName.length()==0){
+            temp.setError("Please Enter an Organisation Name");
+            inputError = true;
+        }
+
         AutoCompleteTextView tempAC = findViewById(R.id.countryAC);
         String country = tempAC.getText().toString();
+        if(country.length()==0){
+            temp.setError("Please Enter the name of the main country involved, if there are multiple countries please write the host or main country");
+            inputError = true;
+        }
+
+
         temp = findViewById(R.id.location);
         String location = temp.getText().toString();
+        if(location.length()==0){
+            temp.setError("Please Enter a location, if the event was online write Online");
+            inputError = true;
+        }
+
         temp = findViewById(R.id.startDate);
         String startDate = temp.getText().toString();
+        if(!GenericMethods.isDate(startDate)){
+            temp.setError("Please Enter a valid Date as dd/mm/yyyy i.e. 01/01/2000");
+            inputError = true;
+        }
+
+
         temp = findViewById(R.id.furtherDetails);
         String details = temp.getText().toString();
+
         tempAC = findViewById(R.id.eventAC);
         String eventType = tempAC.getText().toString();
-        //Note ID should be autogenerated and zid should be based on login data - singleton?
+        if(eventName.length()==0){
+            temp.setError("Please Enter an Event Type");
+            inputError = true;
+        }
+
+        if(inputError){
+            return;
+        }
+
+
+        //Note ID should be autogenerated and zid should be based on login data class
         Activity activity = new Activity(eventName, UserData.getInstance().getLoggedIn().getzId(), orgName, eventType, country, location, startDate, details);
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -248,4 +230,15 @@ public class FormV2Controller extends AppCompatActivity {
         finish();
     }
 
+    // Highly unoptimised method to see if what's entered was an integer, to be optimised at launch
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(Exception e) {
+            Log.d("Error notInt","Nothing entered");
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
+    }
 }

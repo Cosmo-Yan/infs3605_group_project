@@ -3,6 +3,7 @@ package com.example.infs3605_group_project.Activity;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -37,4 +38,7 @@ public interface ActivityDao {
     // Query to insert all received records into the DB
     @Insert
     void insertActivity(Activity... Activities);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void safeInsertActivity(Activity... Activities);
 }
