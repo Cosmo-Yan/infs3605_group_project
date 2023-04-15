@@ -109,41 +109,6 @@ public class FormV2Controller extends AppCompatActivity {
 
         EditText myEditText = findViewById(R.id.orgName);
 
-//        myEditText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // Do nothing
-//            }
-//
-//            //   String regex key:
-//            //       ^: The start of the string
-//            //       [A-Za-z]: One uppercase or lowercase letter
-//            //       \\d{7}: Seven digits (numbers)
-//            //       $: The end of the string
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                // Define the regular expression for the specific format
-//                String regex = "^[z]\\d{7}$";
-//
-//                // Check if the input matches the regular expression
-//                if (!s.toString().matches(regex)) {
-//                    // If the input does not match the regular expression, show an error message
-//                    myEditText.setError("Enter the name of the organiser");
-//                } else {
-//                    // If the input matches the regular expression, clear the error message
-//                    myEditText.setError(null);
-//                }
-//            }
-//
-//
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                // Do nothing
-//            }
-//        });
-
         Button submit = findViewById(R.id.saveButton);
 //        submit.setOnClickListener(new View.OnClickListener() {
 //            @Override
