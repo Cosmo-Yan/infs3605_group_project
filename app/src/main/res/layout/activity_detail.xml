@@ -7,23 +7,80 @@
     tools:context=".DetailActivity">
 
     <TextView
-        android:id="@+id/DetailTitle"
+        android:id="@+id/DetailEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
-        android:text="Event Named Yes"
+        android:text="Event Name"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/detailDate"
         android:layout_width="75dp"
         android:layout_height="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
         android:text="00/00/0000"
+        app:layout_constraintEnd_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toTopOf="@+id/DetailEventName" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1.55"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/event_pic1" />
+
+    <TextView
+        android:id="@+id/detailOrganiser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Organiser"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <TextView
+        android:id="@+id/detailType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Event Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
+
+    <TextView
+        android:id="@+id/detailCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Country Involved"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
+
+    <TextView
+        android:id="@+id/creator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Event Creator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
+
+    <TextView
+        android:id="@+id/detailFurtherDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
+        android:text="Further Details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

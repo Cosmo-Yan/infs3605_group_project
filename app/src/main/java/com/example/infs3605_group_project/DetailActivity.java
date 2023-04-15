@@ -33,7 +33,7 @@ public class DetailActivity extends AppCompatActivity {
             loadActivity(id);
         }
         eventDate = findViewById(R.id.detailDate);
-        eventName = findViewById(R.id.DetailTitle);
+        eventName = findViewById(R.id.DetailEventName);
     }
 
     private void update(Activity activity){

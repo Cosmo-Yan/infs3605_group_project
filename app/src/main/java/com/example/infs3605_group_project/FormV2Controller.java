@@ -238,6 +238,7 @@ public class FormV2Controller extends AppCompatActivity {
             Log.d("Error notInt","Nothing entered");
             return false;
         }
+
         // only got here if we didn't return false
         return true;
     }

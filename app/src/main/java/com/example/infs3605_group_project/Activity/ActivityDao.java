@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -39,6 +40,16 @@ public interface ActivityDao {
     @Insert
     void insertActivity(Activity... Activities);
 
+    // A method specifically made to insert Dummy data on login
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void safeInsertActivity(Activity... Activities);
+
+    // Update Activity
+    @Update
+    void update(Activity activity);
+
+    // Delete Activity
+    @Delete
+    void delete(Activity activity);
+
 }
