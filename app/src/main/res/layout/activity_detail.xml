@@ -10,7 +10,9 @@
         android:id="@+id/DetailEventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="249dp"
         android:fontFamily="sans-serif-black"
         android:text="Event Name"
         android:textSize="24sp"
@@ -20,12 +22,67 @@
 
     <TextView
         android:id="@+id/detailDate"
-        android:layout_width="75dp"
-        android:layout_height="16dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="212dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
         android:text="00/00/0000"
-        app:layout_constraintEnd_toStartOf="@+id/DetailEventName"
-        app:layout_constraintTop_toTopOf="@+id/DetailEventName" />
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/creator" />
+
+    <TextView
+        android:id="@+id/creator"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="Event Creator"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
+
+    <TextView
+        android:id="@+id/detailLocation"
+        android:layout_width="212dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Location"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/detailType" />
+
+    <TextView
+        android:id="@+id/detailCountry"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Country Involved"
+        app:layout_constraintEnd_toEndOf="@+id/detailLocation"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/detailLocation" />
+
+    <TextView
+        android:id="@+id/detailFurtherDetails"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Further Details"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/detailCountry" />
+
+    <TextView
+        android:id="@+id/detailType"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Event Type"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/detailOrganiser" />
+
+    <TextView
+        android:id="@+id/detailOrganiser"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Organiser"
+        app:layout_constraintStart_toStartOf="@+id/DetailEventName"
+        app:layout_constraintTop_toBottomOf="@+id/detailDate" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -37,50 +94,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/event_pic1" />
 
-    <TextView
-        android:id="@+id/detailOrganiser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Organiser"
-        app:layout_constraintTop_toBottomOf="@+id/DetailEventName"
-        tools:layout_editor_absoluteX="120dp" />
-
-    <TextView
-        android:id="@+id/detailType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Event Type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
-
-    <TextView
-        android:id="@+id/detailCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="Country Involved"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
-
-    <TextView
-        android:id="@+id/creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="Event Creator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
-
-    <TextView
-        android:id="@+id/detailFurtherDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
-        android:text="Further Details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailEventName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
