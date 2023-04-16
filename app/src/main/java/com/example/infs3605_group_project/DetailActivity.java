@@ -17,8 +17,14 @@ public class DetailActivity extends AppCompatActivity {
     private Activity activity = new Activity();
     private TextView eventName;
     private TextView eventDate;
+    private TextView creator;
+    private TextView detailDate;
+    private TextView detailOrganiser;
+    private TextView detailType;
+    private TextView detailLocation;
+    private TextView detailCountry;
+    private TextView detailFurtherDetails;
     private ActivityDatabase mDb;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +40,27 @@ public class DetailActivity extends AppCompatActivity {
         }
         eventDate = findViewById(R.id.detailDate);
         eventName = findViewById(R.id.DetailEventName);
+        creator = findViewById(R.id.creator);
+        detailDate = findViewById(R.id.detailDate);
+        detailOrganiser = findViewById(R.id.detailOrganiser);
+        detailType = findViewById(R.id.detailType);
+        detailLocation = findViewById(R.id.detailLocation);
+        detailCountry = findViewById(R.id.detailCountry);
+        detailFurtherDetails = findViewById(R.id.detailFurtherDetails);
+
+
     }
 
     private void update(Activity activity){
         eventName.setText(activity.getEventName());
         eventDate.setText(activity.getEventStartDate());
+        creator.setText(activity.getZid());
+        detailDate.setText(activity.getEventStartDate());
+        detailOrganiser.setText(activity.getNameOfOrganiser());
+        detailType.setText(activity.getEventType());
+        detailLocation.setText(activity.getLocation());
+        detailCountry.setText(activity.getCountry());
+        detailFurtherDetails.setText(activity.getFurtherDetails());
     }
 
     public void loadActivity(int id){

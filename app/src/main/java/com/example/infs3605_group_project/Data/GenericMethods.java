@@ -1,9 +1,11 @@
 package com.example.infs3605_group_project.Data;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
+import com.example.infs3605_group_project.FeedActivity;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -14,7 +16,6 @@ public class GenericMethods {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.activityDao().deleteAll();
                 Activity activity;
                 activity = new Activity(1, "z1234568", "MAHE Academic exchange MoU signed", "H Vinod Bhat", "Education Exchange", "India", "Online", "29/06/2007", "\"The University of New South Wales has strengthened its teaching and research ties in India, signing a Memorandum of Understanding (MoU) with Manipal University last weekend (24 June).\"");
                 mDb.activityDao().safeInsertActivity(activity);
@@ -52,6 +53,17 @@ public class GenericMethods {
                 mDb.activityDao().safeInsertActivity(activity);
                 activity = new Activity(18, "z12345695", "MAHE international partners event", "H Vinod Bhat", "Relations event", "India", "\"New Dheli, India\"", "21/03/2023", "A regular social event was attended by our deligates to network with MAHE and other universities in India");
                 mDb.activityDao().safeInsertActivity(activity);
+            }
+        });
+    }
+
+
+    public static void resetToDummyData(ActivityDatabase mDb) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.activityDao().deleteAll();
+                insertDummyData(mDb);
             }
         });
     }

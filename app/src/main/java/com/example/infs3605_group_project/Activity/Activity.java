@@ -171,4 +171,16 @@ public class Activity {
     public void setZid(String zid) {
         this.zid = zid;
     }
+
+    public void updateTo(Activity activity){
+        this.zid = activity.getZid();
+        this.eventName = activity.getEventName();
+        this.nameOfOrganiser = activity.getNameOfOrganiser();
+        this.eventType = activity.getEventType();
+        this.country = activity.getCountry();
+        this.location = activity.getLocation();
+        this.eventStartDate = activity.getEventStartDate();
+        this.furtherDetails = activity.getFurtherDetails();
+        this.image = activity.getImage();
+    }
 }

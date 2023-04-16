@@ -32,7 +32,6 @@
                     android:layout_marginTop="8dp"
                     android:text="Record Details"
                     android:textColor="@color/white"
-                    android:textColorHint="#040303"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +45,6 @@
                     android:layout_marginTop="2dp"
                     android:text="* Indicates a required field"
                     android:textColor="@color/white"
-                    android:textColorHint="#000000"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/screenName3" />
@@ -74,25 +72,21 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                <AutoCompleteTextView
+                    android:id="@+id/eventAC"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="16dp"
-                    android:hint="@string/select"
+                    android:background="@drawable/edit_text_border_dark"
+                    android:completionHint="Event Type"
+                    android:completionThreshold="1"
+                    android:hint="Select an Event Type*"
+                    android:padding="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/eventName"
-                    app:layout_constraintTop_toBottomOf="@+id/eventName">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/eventAC"
-                        android:layout_width="320dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/edit_text_border_dark"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                    app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
                 <EditText
                     android:id="@+id/orgName"
@@ -109,20 +103,20 @@
                     android:textSize="14sp"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="@+id/eventName"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventAC" />
 
                 <AutoCompleteTextView
                     android:id="@+id/countryAC"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_border_dark"
                     android:completionHint="Select a country"
                     android:completionThreshold="1"
-                    android:hint="Select a country"
-                    android:background="@drawable/edit_text_border_dark"
+                    android:hint="Select a country*"
+                    android:padding="8dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
-                    android:padding="8dp"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/eventName"
                     app:layout_constraintTop_toBottomOf="@+id/orgName" />
@@ -178,22 +172,6 @@
                     app:layout_constraintStart_toStartOf="@+id/eventName"
                     app:layout_constraintTop_toBottomOf="@+id/startDate" />
 
-                <Button
-                    android:id="@+id/uploadImage"
-                    android:layout_width="354dp"
-                    android:layout_height="58dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/form"
-                    android:ems="10"
-                    android:hint="Upload image "
-                    android:inputType="none"
-                    android:textColorHint="#000000"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.491"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/furtherDetails" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
@@ -208,21 +186,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="176dp"
+            android:layout_height="60dp"
+            android:background="@color/unsw_red"
+            app:layout_constraintStart_toStartOf="@+id/cancelButton"
+            app:layout_constraintTop_toTopOf="@+id/cancelButton"></androidx.constraintlayout.widget.ConstraintLayout>
+
         <Button
-            android:layout_marginStart="25dp"
             android:id="@+id/cancelButton"
             android:layout_width="176dp"
             android:layout_height="60dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="10dp"
+            android:background="@color/Invisible"
             android:onClick="cancel"
             android:text="Cancel"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/saveButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="176dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/unsw_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/saveButton"
+            app:layout_constraintStart_toStartOf="@+id/saveButton"
+            app:layout_constraintTop_toTopOf="@+id/saveButton"></androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/saveButton"
@@ -232,9 +229,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="10dp"
+            android:background="@color/Invisible"
             android:onClick="submit"
             android:text="Save"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cancelButton"

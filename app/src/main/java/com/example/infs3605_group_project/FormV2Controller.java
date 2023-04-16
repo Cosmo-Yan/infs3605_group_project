@@ -5,24 +5,20 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.Data.GenericMethods;
+import com.example.infs3605_group_project.Data.UserData;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -70,15 +66,23 @@ public class FormV2Controller extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView;
 
     ArrayAdapter<String> eventItems;
+    public boolean isEdit;
+    public Activity updatingActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_v2);
 
-        // Load the room database
+        // Load the room database and see if this is an edit or create form
+        isEdit = false;
         mDb = Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").fallbackToDestructiveMigration().build();
-//        debugData();
+        if(UserData.getInstance().getTempAct()!=null){
+            isEdit = true;
+            updatingActivity = UserData.getInstance().getTempAct();
+            Log.i("Updating",updatingActivity.getEventName());
+            loadActivity(updatingActivity);
+        }
 
         //For the country auto complete textview
         AutoCompleteTextView countryAutoComplete = findViewById(R.id.countryAC);
@@ -107,17 +111,7 @@ public class FormV2Controller extends AppCompatActivity {
                 findViewById(R.id.eventAC);
         textView.setAdapter(eventAdapter);
 
-        /* This section below is the validation code for the 'Name of Organiser' edit view */
 
-        EditText myEditText = findViewById(R.id.orgName);
-
-        Button submit = findViewById(R.id.saveButton);
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                submit();
-//            }
-//        });
     }
 
     // Whenever the activity is submitted, it is entered into the database
@@ -127,7 +121,6 @@ public class FormV2Controller extends AppCompatActivity {
 
     public void submit(){
         boolean inputError = false;
-
 
         // Extract and validate data on page
         EditText temp = findViewById(R.id.eventName);
@@ -187,14 +180,52 @@ public class FormV2Controller extends AppCompatActivity {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.activityDao().insertActivity(activity);
+                if(isEdit){
+                    updatingActivity = UserData.getInstance().getTempAct();
+                    updatingActivity.updateTo(activity);
+                    mDb.activityDao().update(activity);
+                    UserData.getInstance().delTempAct();
+                } else {
+                    mDb.activityDao().insertActivity(activity);
+                }
                 startActivity(new Intent(getApplicationContext(),FeedActivity.class));
             }
         });
     }
 
+    public void loadActivity(Activity activity){
+        EditText temp = findViewById(R.id.eventName);
+        temp.setText(activity.getEventName());
+
+        temp = findViewById(R.id.orgName);
+        temp.setText(activity.getNameOfOrganiser());
+
+        temp = findViewById(R.id.location);
+        temp.setText(activity.getLocation());
+
+        temp = findViewById(R.id.startDate);
+        temp.setText(activity.getEventStartDate());
+
+
+        temp = findViewById(R.id.furtherDetails);
+        temp.setText(activity.getFurtherDetails());
+
+        AutoCompleteTextView tempAC = findViewById(R.id.countryAC);
+        tempAC.setText(activity.getCountry());
+
+        tempAC = findViewById(R.id.eventAC);
+        tempAC.setText(activity.getEventType());
+    }
+
     public void cancel(View v){
+        UserData.getInstance().delTempAct();
         finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        UserData.getInstance().delTempAct();
     }
 
     // Highly unoptimised method to see if what's entered was an integer, to be optimised at launch

@@ -48,8 +48,4 @@ public interface ActivityDao {
     @Update
     void update(Activity activity);
 
-    // Delete Activity
-    @Delete
-    void delete(Activity activity);
-
 }

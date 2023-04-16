@@ -12,11 +12,16 @@
     <color name="login_color">#FFD025</color>
     <color name="menu_nav">#FFD230</color>
     <color name="form">#FFD230</color>
-    <color name="unsw">#F4DC00</color>
     <color name="white">#FFFFFF</color>
     <color name="feedText">#717070</color>
 
-<!--    Colours below defined to give accents-->
+<!--    Colours Below are part of the UNSW colour pallet-->
+    <color name="unsw">#F4DC00</color>
+    <color name="unsw_red">#FF635D</color>
+    <color name="unsw_green">#1ac987</color>
+
+    <!--    Colours below defined to give accents or change alpha-->
     <color name="lighten">#24FFFFFF</color>
     <color name="light_blue">#2daae2</color>
+    <color name="Invisible">#00000000</color>
 </resources>

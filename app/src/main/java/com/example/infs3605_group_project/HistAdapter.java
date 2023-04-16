@@ -4,9 +4,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3605_group_project.Activity.Activity;
@@ -51,12 +53,36 @@ public class HistAdapter extends RecyclerView.Adapter<HistAdapter.MyViewHolder>{
             super(itemView);
             eventName = itemView.findViewById(R.id.ListEventName);
             date = itemView.findViewById(R.id.ListEventDate);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            ConstraintLayout tempItem = itemView.findViewById(R.id.eventItem);
+            ImageView trashIcon = itemView.findViewById(R.id.trashIcon);
+            ImageView editIcon = itemView.findViewById(R.id.editIcon);
+
+            // Display when item is clicked
+            tempItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(mInterface != null){
                         mInterface.onClick((int) itemView.getTag());
-                        Log.i("Pressed",eventName.getText().toString());
+                    }
+                }
+            });
+
+            // Delete if trash icon is clicked
+            trashIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mInterface != null){
+                        mInterface.delClick((int) itemView.getTag());
+                    }
+                }
+            });
+
+            // Update if edit is clicked
+            editIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mInterface != null){
+                        mInterface.editClick((int) itemView.getTag());
                     }
                 }
             });

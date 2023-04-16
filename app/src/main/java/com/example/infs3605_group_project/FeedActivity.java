@@ -41,6 +41,7 @@ public class FeedActivity extends AppCompatActivity {
         eventImageMap.put("Education Exchange",3);
         eventImageMap.put("Centre Opening (International)",4);
         eventImageMap.put("Centre Opening (Domestic)",5);
+        eventImageMap.put("Centre (int/domestic)",5);
         eventImageMap.put("Relations Event",6);
         eventImageMap.put("Guest Speaker (International)",7);
         eventImageMap.put("Guest Speaker (Domestic)",8);
@@ -78,7 +79,7 @@ public class FeedActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.newEvent:
-                        startActivity(new Intent(getApplicationContext(),NewEventActivity.class));
+                        startActivity(new Intent(getApplicationContext(),FormV2Controller.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -101,7 +102,7 @@ public class FeedActivity extends AppCompatActivity {
                     if(eventImageMap.containsKey(eventType1)){
                         imageId = eventImageMap.get(temp.getEventType());
                     } else{
-                        Log.e("Activity Type Error",eventType1);
+                        Log.i("Activity Type Error",eventType1);
                     }
                     feedEventModels.add(new FeedEventModel(temp.getEventName(), temp.getEventType(),eventImages[imageId]));
                 }

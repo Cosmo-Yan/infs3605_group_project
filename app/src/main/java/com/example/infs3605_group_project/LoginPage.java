@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.Data.GenericMethods;
-import com.example.infs3605_group_project.Data.User;
+import com.example.infs3605_group_project.Data.UserData;
 
 public class LoginPage extends AppCompatActivity {
     EditText username;
@@ -37,6 +37,7 @@ public class LoginPage extends AppCompatActivity {
                 }
             }
         });
+
         GenericMethods.insertDummyData(Room.databaseBuilder(getApplicationContext(), ActivityDatabase.class, "courses-database").fallbackToDestructiveMigration().build());
     }
 }
