@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -182,6 +183,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Sets local Filter Variable attribute to equal selected text.
                 filters.setYear(yearSpinner.getSelectedItem().toString());
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 //Filters Data
                 filterData();
             }
@@ -208,6 +210,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Sets local Filter Variable attribute to equal selected text.
                 filters.setCountry(countrySpinner.getSelectedItem().toString());
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
                 //Filters Data
                 filterData();
             }
