@@ -1,24 +1,20 @@
-package com.example.infs3605_group_project;
+package com.example.infs3605_group_project.Data;
 
 
 import android.util.Log;
 
 import com.example.infs3605_group_project.Activity.Activity;
-import com.example.infs3605_group_project.Activity.ActivityDao;
-import com.example.infs3605_group_project.Activity.ActivityDatabase;
-import com.example.infs3605_group_project.Data.User;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
 
 
 public class UserData {
     // Static variable reference of single_instance
     // of type Singleton
     private static UserData single_instance = null;
-    public ArrayList<User> users = new ArrayList<User>();
-    public User loggedIn = null;
+    private ArrayList<User> users = new ArrayList<User>();
+    private User loggedIn = null;
+    private Activity tempAct = null;
 
 
     // Constructor
@@ -29,6 +25,18 @@ public class UserData {
         users.add(tempUser);
         tempUser = new User("z1234567","i5",3,"Bob");
         users.add(tempUser);
+    }
+
+    public Activity getTempAct(){
+        return tempAct;
+    }
+
+    public void setTempAct(Activity activity){
+        tempAct = activity;
+    }
+
+    public void delTempAct(){
+        tempAct = null;
     }
 
     // Static method

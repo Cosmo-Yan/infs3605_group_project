@@ -28,6 +28,7 @@ import com.example.infs3605_group_project.AccountActivity;
 import com.example.infs3605_group_project.Activity.Activity;
 import com.example.infs3605_group_project.Activity.ActivityDatabase;
 import com.example.infs3605_group_project.FeedActivity;
+import com.example.infs3605_group_project.FormV2Controller;
 import com.example.infs3605_group_project.NewEventActivity;
 import com.example.infs3605_group_project.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -110,7 +111,7 @@ public class DashboardActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.newEvent:
-                        startActivity(new Intent(getApplicationContext(), NewEventActivity.class));
+                        startActivity(new Intent(getApplicationContext(), FormV2Controller.class));
                         overridePendingTransition(0,0);
                         return true;
 

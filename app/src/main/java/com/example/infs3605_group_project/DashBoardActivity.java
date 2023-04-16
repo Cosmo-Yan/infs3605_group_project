@@ -40,7 +40,7 @@ public class DashBoardActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.newEvent:
-                        startActivity(new Intent(getApplicationContext(),NewEventActivity.class));
+                        startActivity(new Intent(getApplicationContext(),FormV2Controller.class));
                         overridePendingTransition(0,0);
                         return true;
 

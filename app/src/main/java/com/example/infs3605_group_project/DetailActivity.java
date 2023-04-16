@@ -26,7 +26,6 @@ public class DetailActivity extends AppCompatActivity {
     private TextView detailFurtherDetails;
     private ActivityDatabase mDb;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +55,7 @@ public class DetailActivity extends AppCompatActivity {
         eventName.setText(activity.getZid());
         eventDate.setText(activity.getEventStartDate());
         creator.setText(activity.getNameOfOrganiser());
+        creator.setText(activity.getZid());
         detailDate.setText(activity.getEventStartDate());
         detailOrganiser.setText(activity.getNameOfOrganiser());
         detailType.setText(activity.getEventType());
