@@ -150,6 +150,9 @@ public class FormV2Controller extends AppCompatActivity {
         if(location.length()==0){
             temp.setError("Please Enter a location, if the event was online write Online");
             inputError = true;
+        } else if(!location.equalsIgnoreCase("Online") && !location.contains(", ")){
+            temp.setError("Please Enter Location as Online or <State, Country> i.e. <Gujurat, India>");
+            inputError = true;
         }
 
         temp = findViewById(R.id.startDate);
@@ -183,7 +186,7 @@ public class FormV2Controller extends AppCompatActivity {
                 if(isEdit){
                     updatingActivity = UserData.getInstance().getTempAct();
                     updatingActivity.updateTo(activity);
-                    mDb.activityDao().update(activity);
+                    mDb.activityDao().update(updatingActivity);
                     UserData.getInstance().delTempAct();
                 } else {
                     mDb.activityDao().insertActivity(activity);
